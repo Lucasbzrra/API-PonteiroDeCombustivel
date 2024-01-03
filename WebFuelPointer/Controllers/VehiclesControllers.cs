@@ -14,10 +14,17 @@ public class VehiclesControllers:ControllerBase
 		_mediator = mediator;
 	}
 	[HttpPost("/v1/Post")]
-	[ProducesResponseType(statusCode:200),ProducesResponseType(statusCode:400)]
-	public async Task<ActionResult<CreateVehicleResponseDto>> Create(CreateVehicleRequestDto createVehicleRequestDto,CancellationToken cancellationToken)
+	[ProducesResponseType(statusCode:201),ProducesResponseType(statusCode:400)]
+	public async Task<ActionResult<ReadVehicleResponseDto>> Create(CreateVehicleRequestDto createVehicleRequestDto,CancellationToken cancellationToken)
 	{
 		var response = await _mediator.Send(createVehicleRequestDto,cancellationToken);
 		return Ok(response);
+	}
+	[HttpGet("/v1/GetVehicle/")]
+	[ProducesResponseType(statusCode:202),ProducesResponseType(statusCode:401)]
+	public async Task<ActionResult<ReadVehicleResponseDto>> Get( ReadVehicleRequestDto id , CancellationToken cancellationToken)
+	{
+		var response= await _mediator.Send(id, cancellationToken );
+		return Accepted(response);
 	}
 }

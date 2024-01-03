@@ -9,7 +9,12 @@ public sealed class Mappings:Profile
 {
     public Mappings()
     {
+        //Create
         CreateMap<CreateVehicleRequestDto, Vehicle>();
-        CreateMap<Vehicle, CreateVehicleResponseDto>();
+        CreateMap<Vehicle, ReadVehicleResponseDto>();
+
+        //Read
+        CreateMap<Vehicle, ReadVehicleResponseDto>();
+
     }
 }
