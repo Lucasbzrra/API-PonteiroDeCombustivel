@@ -28,9 +28,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         _context.Remove(entity);
     }
 
-    public async Task<T> Get(Guid id, CancellationToken cancellationToken)
+    public async Task<T> Get(Guid Id, CancellationToken cancellationToken)
     {
-       return await _context.Set<T>().FirstOrDefaultAsync(x=>x.id==id,cancellationToken);
+       return await _context.Set<T>().FirstOrDefaultAsync(x=>x.id==Id,cancellationToken);
     }
 
     public async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)

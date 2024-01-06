@@ -1,12 +1,10 @@
-﻿
-using Domain.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using Domain.Entities;
 
-namespace Application.VehicleCases.CreateVehicle;
 
-public sealed record CreateVehicleResponseDto
+namespace Application.VehicleCases.CreateVehicle.Query;
+
+public sealed record DeleteVehicleResponseDto
 {
-   
     public string Name { get; set; }
 
     public string Plate { get; set; }
@@ -14,5 +12,4 @@ public sealed record CreateVehicleResponseDto
     public double KmPerLiter { get; set; }
 
     public ICollection<Fuel>? Fuel { get; set; }
-
 }

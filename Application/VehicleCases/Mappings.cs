@@ -1,7 +1,7 @@
 ﻿using Application.VehicleCases.CreateVehicle;
 using AutoMapper;
 using Domain.Entities;
-
+using WebFuelPointer.Controllers;
 
 namespace Application.VehicleCases;
 
@@ -11,10 +11,13 @@ public sealed class Mappings:Profile
     {
         //Create
         CreateMap<CreateVehicleRequestDto, Vehicle>();
-        CreateMap<Vehicle, ReadVehicleResponseDto>();
 
         //Read
-        CreateMap<Vehicle, ReadVehicleResponseDto>();
+        CreateMap<ReadVehicleRequestDto, ReadVehicleResponseDto>();
+
+        //Delete
+        CreateMap<DeleteVehicleRequestDto, Vehicle>();
+        CreateMap<Vehicle, DeleteVehicleResponseDto>();
 
     }
 }

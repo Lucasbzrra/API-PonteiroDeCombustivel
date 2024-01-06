@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Shared\Behavior\" />
     <Folder Include="Shared\Exceptions\" />
+    <Folder Include="VehicleCases\Handler\" />
   </ItemGroup>
 
   <ItemGroup>
