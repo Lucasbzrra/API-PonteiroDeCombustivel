@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.VehicleCases.CreateVehicle.Command;
 
-public sealed record ReadVehicleRequestDto(Guid id) : IRequest<CreateVehicleResponseDto>;
+public sealed record ReadVehicleRequestDto(Guid id) : IRequest<ReadVehicleResponseDto>;

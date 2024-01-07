@@ -1,21 +1,16 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using Domain.Entities;
 
-namespace Domain.Entities;
+namespace Application.FuelCases.Handlers;
 
-public class Fuel:BaseEntity
+public class FuelDeleteResponse
 {
 
-    [Required]
-    [Range(1, 50)]
     public double QuantityOfLiters { get; set; }
 
-    [Required]
-    [Range(1,2,ErrorMessage ="1-Gasol, 2-Etanol")]
+
     public TypFuelEnum typeFuel { get; set; }
 
 
-    [Range(1, double.MaxValue)]
     public double ValuePerLiter { get; set; }
 
     public string SupplyDate { get; set; }
@@ -28,5 +23,4 @@ public class Fuel:BaseEntity
 
     public Destination destination { get; set; }
     public virtual Guid DestinationId { get; set; }
-
 }
