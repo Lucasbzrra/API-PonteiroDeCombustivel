@@ -2,8 +2,6 @@
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DataContext;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace Persistence.Repositories;
 
@@ -12,21 +10,35 @@ public class FuelRepository : BaseRepository<Fuel>,IBaseRepository<Fuel>
     public FuelRepository(FuelPointerDbContext fuelContext) : base(fuelContext)
     {
     }
-    public async Task<Object> CalculateTotalFuel(params object[] objects)
+    public async Task<Object> Calculate(string plate, string? SaberAutonomia)
     {
-       Object functin()
-       {
-            if (name is null) ;
-             var name1 =_context.Tb_Fuels;
-            return name1;
+        //from a in _context.Tb_Fuels
+        //join b in _context.Tb_Vehicles on a.id equals b.id
+        //where b.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase)
+        //select a.QuantityOfLiters * b.KmPerLiter;
+        string function()
+        {
+            if (SaberAutonomia != null)
+            {
+              
+                string colunaValuePerLiter = "ValuePerLiter";
+                return colunaValuePerLiter;
+            }
+            string colunaKmPerliter = "KmPerLiter";
+            return colunaKmPerliter;
         }
-            var query = functin()+"".Where(x => x.Vehicle.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase))
-                                    .Select(a => a.ValuePerLiter *  a.QuantityOfLiters);
-        return  query.ToListAsync();
+        var coluna = function();
+
+        var query = _context.Tb_Fuels.FromSqlRaw($"select QuantityOfLiters * @coluna  from _context.Tb_Fuels  join _context.Tb_Vehicles on _context.Tb_Fuels.plate=_context.Tb_Vehicles.plate where plate=_context.Tb_Fuels.plate");
+
+        return query.ToListAsync();
     }
-    public Task<Object> CalculateAutonimiaFuel(string plate)
+    public async Task<Object> CalculateTotalFuel(string plate, string table)
     {
-        var query = _context.Tb_Fuels.Where(x => x.Vehicle.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase))
-                                   .Select(a => a.ValuePerLiter * a.QuantityOfLiters);
+        //var query = _context.Tb_Fuels.Where(x => x.Vehicle.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase))
+        //                            .Select(a => a.ValuePerLiter * a.QuantityOfLiters);
+        var result = Calculate(plate, table);
+        return result;
     }
+    
 }
