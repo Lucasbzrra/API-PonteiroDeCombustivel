@@ -1,4 +1,5 @@
 ﻿using Application.FuelCases.Command;
+using Application.FuelCases.Queries;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;

@@ -8,10 +8,10 @@ namespace WebFuelPointer.Controllers;
 
 [ApiController]
 [Route("/Controller")]
-public class VehiclesControllers:ControllerBase
+public class VehicleController:ControllerBase
 {
 	private readonly IMediator _mediator;
-	public VehiclesControllers(IMediator mediator)
+	public VehicleController(IMediator mediator)
 	{
 		_mediator = mediator;
 	}

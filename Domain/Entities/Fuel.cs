@@ -20,13 +20,12 @@ public class Fuel:BaseEntity
 
     public string SupplyDate { get; set; }
 
-    public Vehicle Vehicle { get; set; }
-    public virtual Guid VehicleId { get; set; }
+    public Guid  VehicleId { get; set; }
 
-    public DepartureLocation departureLocation { get; set; }
-    public virtual Guid DepartureLocationId { get; set; }
+    public DepartureLocation departureLocationId { get; set; }
+    //public virtual Guid ? DepartureLocationId  { get; set; }
 
-    public Destination destination { get; set; }
-    public virtual Guid DestinationId { get; set; }
+    public Destination destinationId { get; set; }
+    //public virtual Guid ? DestinationId { get; set; }
 
 }

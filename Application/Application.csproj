@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FuelCases\Queries\" />
     <Folder Include="Shared\Behavior\" />
     <Folder Include="Shared\Exceptions\" />
   </ItemGroup>

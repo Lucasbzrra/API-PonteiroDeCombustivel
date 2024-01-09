@@ -1,4 +1,6 @@
-﻿using Application.VehicleCases.CreateVehicle.Command;
+﻿using Application.FuelCases.Command;
+using Application.FuelCases.Queries;
+using Application.VehicleCases.CreateVehicle.Command;
 using Application.VehicleCases.CreateVehicle.Queries;
 using Application.VehicleCases.CreateVehicle.Query;
 using AutoMapper;
@@ -25,5 +27,11 @@ public sealed class Mappings:Profile
         //Update
         CreateMap<UpdateVehicleRequesDto, Vehicle>();
         CreateMap<Vehicle, UpdateVehicleResponseDto>();
+
+        //Create Fuels
+        CreateMap<FuelCreateRequest, Fuel>();
+        CreateMap<Fuel, FuelCreateResponse>();
+
+
     }
 }

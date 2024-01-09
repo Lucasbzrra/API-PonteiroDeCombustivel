@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Application.FuelCases.Handlers;
+namespace Application.FuelCases.Queries;
 
 public class FuelDeleteResponse
 {

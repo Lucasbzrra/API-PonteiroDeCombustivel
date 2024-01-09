@@ -5,7 +5,7 @@ using Persistence.DataContext;
 
 namespace Persistence.Repositories;
 
-public class FuelRepository : BaseRepository<Fuel>,IBaseRepository<Fuel>
+public class FuelRepository : BaseRepository<Fuel>,IFuelRepository
 {
     public FuelRepository(FuelPointerDbContext fuelContext) : base(fuelContext)
     {

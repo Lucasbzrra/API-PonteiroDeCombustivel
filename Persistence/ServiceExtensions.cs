@@ -17,5 +17,6 @@ public static class ServiceExtensions
         services.AddDbContext<FuelPointerDbContext>(opt => opt.UseSqlServer(connectionString));
         services.AddScoped<IUnitOfWork, UnitOfWorkRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
+        services.AddScoped<IFuelRepository,FuelRepository>();
     }
 }
