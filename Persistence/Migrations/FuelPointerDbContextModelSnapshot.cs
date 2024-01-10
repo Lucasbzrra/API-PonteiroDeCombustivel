@@ -32,6 +32,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("FuelId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ReferencePoint")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,6 +43,9 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FuelId")
+                        .IsUnique();
 
                     b.ToTable("Tb_DepartureLocations");
                 });
@@ -54,6 +60,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("FuelId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ReferencePoint")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,20 +72,29 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FuelId")
+                        .IsUnique();
+
                     b.ToTable("Tb_Destinations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Fuel", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartureLocationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<Guid>("DestinationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("DateDeleted")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DateUpdate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("IdFuel")
+                        .HasColumnType("int");
 
                     b.Property<double>("QuantityOfLiters")
                         .HasColumnType("float");
@@ -88,19 +106,24 @@ namespace Persistence.Migrations
                     b.Property<double>("ValuePerLiter")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("VehicleId")
+                    b.Property<Guid?>("Vehicleid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("departureLocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("destinationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("typeFuel")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
-                    b.HasIndex("DepartureLocationId");
+                    b.HasIndex("IdFuel")
+                        .IsUnique();
 
-                    b.HasIndex("DestinationId");
-
-                    b.HasIndex("VehicleId");
+                    b.HasIndex("Vehicleid");
 
                     b.ToTable("Tb_Fuels");
                 });
@@ -140,31 +163,42 @@ namespace Persistence.Migrations
                     b.ToTable("Tb_Vehicles");
                 });
 
+            modelBuilder.Entity("Domain.Entities.DepartureLocation", b =>
+                {
+                    b.HasOne("Domain.Entities.Fuel", "Fuel")
+                        .WithOne("departureLocation")
+                        .HasForeignKey("Domain.Entities.DepartureLocation", "FuelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fuel");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Destination", b =>
+                {
+                    b.HasOne("Domain.Entities.Fuel", "Fuel")
+                        .WithOne("destination")
+                        .HasForeignKey("Domain.Entities.Destination", "FuelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fuel");
+                });
+
             modelBuilder.Entity("Domain.Entities.Fuel", b =>
                 {
-                    b.HasOne("Domain.Entities.DepartureLocation", "departureLocation")
-                        .WithMany()
-                        .HasForeignKey("DepartureLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Destination", "destination")
-                        .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Vehicle", "Vehicle")
+                    b.HasOne("Domain.Entities.Vehicle", null)
                         .WithMany("Fuel")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Vehicleid");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Fuel", b =>
+                {
+                    b.Navigation("departureLocation")
                         .IsRequired();
 
-                    b.Navigation("Vehicle");
-
-                    b.Navigation("departureLocation");
-
-                    b.Navigation("destination");
+                    b.Navigation("destination")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Vehicle", b =>

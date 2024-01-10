@@ -5,6 +5,13 @@ namespace Domain.Entities;
 
 public class Fuel:BaseEntity
 {
+    private static int nextIdFuel = 0;
+    public int IdFuel { get; }
+    public Fuel()
+    {
+        IdFuel = nextIdFuel;
+        nextIdFuel++;
+    }
 
     [Required]
     [Range(1, 50)]
@@ -20,12 +27,11 @@ public class Fuel:BaseEntity
 
     public string SupplyDate { get; set; }
 
-    public Guid  VehicleId { get; set; }
+    public Guid departureLocationId { get; set; }
+    public  DepartureLocation departureLocation { get; set; }
+    
+    public Guid destinationId { get; set; }
+    public  Destination destination { get; set; }
 
-    public DepartureLocation departureLocationId { get; set; }
-    //public virtual Guid ? DepartureLocationId  { get; set; }
-
-    public Destination destinationId { get; set; }
-    //public virtual Guid ? DestinationId { get; set; }
 
 }

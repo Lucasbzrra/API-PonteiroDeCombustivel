@@ -28,10 +28,23 @@ public sealed class Mappings:Profile
         CreateMap<UpdateVehicleRequesDto, Vehicle>();
         CreateMap<Vehicle, UpdateVehicleResponseDto>();
 
+        ////////////////////////////////////////////////////////
+
         //Create Fuels
         CreateMap<FuelCreateRequest, Fuel>();
         CreateMap<Fuel, FuelCreateResponse>();
 
+        //Read Fuesl
+
+        CreateMap<FuelReadRequest, Fuel>();
+        CreateMap<Fuel,FuelReadResponse>();
+
+        //Update Fuel
+        CreateMap<FuelUpdateRequest, Fuel>();
+        CreateMap<Fuel, FuelUpdateResponse>();
+
+        CreateMap<FuelDeleteRequest, Fuel>();
+        CreateMap<Fuel, FuelDeleteResponse>();
 
     }
 }

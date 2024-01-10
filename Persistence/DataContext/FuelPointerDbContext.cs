@@ -1,5 +1,8 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System;
+using System.Runtime.CompilerServices;
 
 namespace Persistence.DataContext;
 
@@ -15,7 +18,24 @@ public class FuelPointerDbContext:DbContext
     public DbSet<DepartureLocation> Tb_DepartureLocations { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Vehicle>().HasIndex(x => x.Plate).IsUnique();
-        
+
+
+        modelBuilder.Entity<Fuel>()
+        .HasOne(Fuel => Fuel.departureLocation)
+        .WithOne(departure => departure.Fuel)
+        .HasForeignKey<DepartureLocation>(departure => departure.FuelId);
+
+        modelBuilder.Entity<Fuel>()
+        .HasOne(fuel => fuel.destination)
+        .WithOne(departure => departure.Fuel)
+        .HasForeignKey<Destination>(departure => departure.FuelId);
+
+        modelBuilder.Entity<Vehicle>().HasIndex(vehicle => vehicle.Plate).IsUnique();
+        modelBuilder.Entity<Fuel>().HasIndex(fuel => fuel.IdFuel).IsUnique();
+
+        //modelBuilder.Entity<Fuel>().HasNoKey().ToView("vw_CostofFuel");
+        //modelBuilder.Entity<Fuel>().HasNoKey().ToView("vw_FuelConsumption");
+
+
     }
 }

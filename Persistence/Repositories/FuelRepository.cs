@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DataContext;
+using System.Linq;
 
 namespace Persistence.Repositories;
 
@@ -10,35 +11,8 @@ public class FuelRepository : BaseRepository<Fuel>,IFuelRepository
     public FuelRepository(FuelPointerDbContext fuelContext) : base(fuelContext)
     {
     }
-    public async Task<Object> Calculate(string plate, string? SaberAutonomia)
+    public async Task<Fuel> GetByFuel(int id, CancellationToken cancellationToken)
     {
-        //from a in _context.Tb_Fuels
-        //join b in _context.Tb_Vehicles on a.id equals b.id
-        //where b.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase)
-        //select a.QuantityOfLiters * b.KmPerLiter;
-        string function()
-        {
-            if (SaberAutonomia != null)
-            {
-              
-                string colunaValuePerLiter = "ValuePerLiter";
-                return colunaValuePerLiter;
-            }
-            string colunaKmPerliter = "KmPerLiter";
-            return colunaKmPerliter;
-        }
-        var coluna = function();
-
-        var query = _context.Tb_Fuels.FromSqlRaw($"select QuantityOfLiters * @coluna  from _context.Tb_Fuels  join _context.Tb_Vehicles on _context.Tb_Fuels.plate=_context.Tb_Vehicles.plate where plate=_context.Tb_Fuels.plate");
-
-        return query.ToListAsync();
+        return _context.Tb_Fuels.FirstOrDefault(x => x.IdFuel == id);
     }
-    public async Task<Object> CalculateTotalFuel(string plate, string table)
-    {
-        //var query = _context.Tb_Fuels.Where(x => x.Vehicle.Plate.Equals(plate, StringComparison.InvariantCultureIgnoreCase))
-        //                            .Select(a => a.ValuePerLiter * a.QuantityOfLiters);
-        var result = Calculate(plate, table);
-        return result;
-    }
-    
 }

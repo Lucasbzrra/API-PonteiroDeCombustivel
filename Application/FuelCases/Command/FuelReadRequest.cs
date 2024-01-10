@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.FuelCases.Command;
 
-public sealed record FuelDeleteRequest(Guid id) : IRequest<FuelDeleteResponse>;
+public sealed record FuelReadRequest(Guid id) : IRequest<FuelReadResponse>;
