@@ -1,8 +1,5 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System;
-using System.Runtime.CompilerServices;
 
 namespace Persistence.DataContext;
 
@@ -31,10 +28,10 @@ public class FuelPointerDbContext:DbContext
         .HasForeignKey<Destination>(departure => departure.FuelId);
 
         modelBuilder.Entity<Vehicle>().HasIndex(vehicle => vehicle.Plate).IsUnique();
+        modelBuilder.Entity<Vehicle>().HasIndex(Vehicle=> Vehicle.idVehicle).IsUnique();
         modelBuilder.Entity<Fuel>().HasIndex(fuel => fuel.IdFuel).IsUnique();
-
-        //modelBuilder.Entity<Fuel>().HasNoKey().ToView("vw_CostofFuel");
-        //modelBuilder.Entity<Fuel>().HasNoKey().ToView("vw_FuelConsumption");
+        modelBuilder.Entity<Destination>().HasIndex(Destination=>Destination.IdDestination).IsUnique();
+        modelBuilder.Entity<DepartureLocation>().HasIndex(DepartureLocation => DepartureLocation.IdDepartureLocation).IsUnique();
 
 
     }

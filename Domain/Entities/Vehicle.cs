@@ -5,7 +5,16 @@ namespace Domain.Entities;
 
 public class Vehicle:BaseEntity
 {
-  
+
+    private static int nextIdFuel = 0;
+    public int idVehicle { get; }
+    public Vehicle()
+    {
+        idVehicle = nextIdFuel;
+        nextIdFuel++;
+    }
+
+
     [Required(AllowEmptyStrings = false, ErrorMessage = "Necessário nome do carrro")]
     public string Name { get; set; }
     [Column(TypeName ="char")]
