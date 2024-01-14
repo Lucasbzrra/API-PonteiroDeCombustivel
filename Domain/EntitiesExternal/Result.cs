@@ -1,7 +1,16 @@
-﻿namespace Domain.EntitiesExternal;
+﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
-public class Result
+namespace Domain.EntitiesExternal;
+
+public sealed class Result
 {
+    [JsonPropertyName("formatted")]
     public string formatted { get; set; }
+
+    [JsonPropertyName("geometry")]
+
     public Geometry geometry { get; set; }
+
+
 }

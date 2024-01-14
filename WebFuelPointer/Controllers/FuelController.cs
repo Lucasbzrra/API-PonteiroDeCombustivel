@@ -10,9 +10,11 @@ namespace WebFuelPointer.Controllers;
 public class FuelController:ControllerBase
 {
 	private readonly IMediator _mediator;
-	public FuelController(IMediator mediator)
+    private  DestinationController _destinationController;
+	public FuelController(IMediator mediator, DestinationController destinationController)
 	{
 		_mediator= mediator;
+        _destinationController= destinationController;
 	}
 
     /// <summary>
@@ -27,6 +29,9 @@ public class FuelController:ControllerBase
     {
 
         var response = await _mediator.Send(fuelCreateRequest, cancellationToken);
+        
+        _destinationController.post(response.departureLocation, cancellationToken);
+
         return Ok(response);
     }
 

@@ -1,10 +1,9 @@
 ﻿using Domain.Entities;
 
 
-namespace Domain.Interfaces
+namespace Domain.Interfaces;
+
+public interface IDestinationRepository:IBaseRepository<Destination>
 {
-    public interface IDestinationRepository:IBaseRepository<Destination>
-    {
-        Task<Destination> GetbyDestination(int id);
-    }
+    Task<Destination> GetbyDestination(int id);
 }

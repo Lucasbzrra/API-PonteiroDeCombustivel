@@ -1,4 +1,6 @@
-﻿using Application.DestinationCases.Command;
+﻿using Application.DepartureLocationCases.Command;
+using Application.DepartureLocationCases.Query;
+using Application.DestinationCases.Command;
 using Application.DestinationCases.Query;
 using Application.FuelCases.Command;
 using Application.FuelCases.Queries;
@@ -14,41 +16,32 @@ public sealed class Mappings : Profile
 {
     public Mappings()
     {
-        //Create
-        CreateMap<CreateVehicleRequestDto, Vehicle>();
-        CreateMap<Vehicle, CreateVehicleResponseDto>();
+        CreateMap<CreateVehicleRequest, Vehicle>();
+        CreateMap<Vehicle, CreateVehicleResponse>();
 
-        //Read
-        CreateMap<ReadVehicleRequestDto, Vehicle>();
-        CreateMap<Vehicle, ReadVehicleResponseDto>();
 
-        //Delete
-        CreateMap<DeleteVehicleRequestDto, Vehicle>();
-        CreateMap<Vehicle, DeleteVehicleResponseDto>();
+        CreateMap<ReadVehicleRequest, Vehicle>();
+        CreateMap<Vehicle, ReadVehicleResponse>();
 
-        //Update
-        CreateMap<UpdateVehicleRequesDto, Vehicle>();
-        CreateMap<Vehicle, UpdateVehicleResponseDto>();
+        CreateMap<DeleteVehicleRequest, Vehicle>();
+        CreateMap<Vehicle, DeleteVehicleResponse>();
 
-        ////////////////////////////////////////////////////////
+        CreateMap<UpdateVehicleReques, Vehicle>();
+        CreateMap<Vehicle, UpdateVehicleResponse>();
 
-        //Create Fuels
         CreateMap<FuelCreateRequest, Fuel>();
         CreateMap<Fuel, FuelCreateResponse>();
 
-        //Read Fuesl
 
         CreateMap<FuelReadRequest, Fuel>();
         CreateMap<Fuel, FuelReadResponse>();
 
-        //Update Fuel
         CreateMap<FuelUpdateRequest, Fuel>();
         CreateMap<Fuel, FuelUpdateResponse>();
 
         CreateMap<FuelDeleteRequest, Fuel>();
         CreateMap<Fuel, FuelDeleteResponse>();
 
-        ////////////////////////////////////////////////////////
 
         CreateMap<CreateDestinationResponse, Destination>();
         CreateMap<Destination, CreateDestinationResponse>();
@@ -58,6 +51,19 @@ public sealed class Mappings : Profile
 
         CreateMap<DeletDestinationRequest, Destination>();
         CreateMap<Destination, DeletDestinationResponse>();
+
+        CreateMap<UpdateDestinationRequest, Destination>();
+        CreateMap<Destination, UpdateDestinationResponse>();
+
+
+        CreateMap<CreateDepartureLocationRequest, DepartureLocation>();
+        CreateMap<DepartureLocation, CreateDepartureLocationResponse>();
+
+        CreateMap<ReadDepartureLocationRequest, DepartureLocation>();
+        CreateMap<DepartureLocation, ReadDepartureLocationResponse>();
+
+        CreateMap<DeleteDepartureLocationRequest, DepartureLocation>();
+        CreateMap<DepartureLocation, DeleteDepartureLocationResponse>();
 
     }
 }

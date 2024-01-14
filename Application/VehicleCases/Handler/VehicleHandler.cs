@@ -8,10 +8,10 @@ using MediatR;
 
 namespace Application.VehicleCases.Handler;
 
-public class VehicleHandller : IRequestHandler<CreateVehicleRequestDto, CreateVehicleResponseDto>,
-                                     IRequestHandler<ReadVehicleRequestDto, ReadVehicleResponseDto>,
-                                     IRequestHandler<DeleteVehicleRequestDto, DeleteVehicleResponseDto>,
-                                     IRequestHandler<UpdateVehicleRequesDto, UpdateVehicleResponseDto>
+public class VehicleHandller : IRequestHandler<CreateVehicleRequest, CreateVehicleResponse>,
+                                     IRequestHandler<ReadVehicleRequest, ReadVehicleResponse>,
+                                     IRequestHandler<DeleteVehicleRequest, DeleteVehicleResponse>,
+                                     IRequestHandler<UpdateVehicleReques, UpdateVehicleResponse>
                                      
 
 {
@@ -24,36 +24,36 @@ public class VehicleHandller : IRequestHandler<CreateVehicleRequestDto, CreateVe
         _vehicleRepository = vehicleRepository;
         _mapper = mapper;
     }
-    public async Task<CreateVehicleResponseDto> Handle(CreateVehicleRequestDto request, CancellationToken cancellationToken)
+    public async Task<CreateVehicleResponse> Handle(CreateVehicleRequest request, CancellationToken cancellationToken)
     {
         var vehicle = _mapper.Map<Vehicle>(request);
         _vehicleRepository.Create(vehicle);
         await _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<CreateVehicleResponseDto>(vehicle);
+        return _mapper.Map<CreateVehicleResponse>(vehicle);
     }
 
-    public async Task<ReadVehicleResponseDto> Handle(ReadVehicleRequestDto request, CancellationToken cancellationToken)
+    public async Task<ReadVehicleResponse> Handle(ReadVehicleRequest request, CancellationToken cancellationToken)
     {
         var VehicleFound = await _vehicleRepository.Get(request.id, cancellationToken);
-        return _mapper.Map<ReadVehicleResponseDto>(VehicleFound);
+        return _mapper.Map<ReadVehicleResponse>(VehicleFound);
     }
 
-    public async Task<DeleteVehicleResponseDto> Handle(DeleteVehicleRequestDto request, CancellationToken cancellationToken)
+    public async Task<DeleteVehicleResponse> Handle(DeleteVehicleRequest request, CancellationToken cancellationToken)
     {
         var VehicleFound = await _vehicleRepository.Get(request.Id, cancellationToken);
         if (VehicleFound == null) { return default; }
         _vehicleRepository.Delete(VehicleFound);
         await _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<DeleteVehicleResponseDto>(VehicleFound);
+        return _mapper.Map<DeleteVehicleResponse>(VehicleFound);
 
     }
 
-    public async Task<UpdateVehicleResponseDto> Handle(UpdateVehicleRequesDto request, CancellationToken cancellationToken)
+    public async Task<UpdateVehicleResponse> Handle(UpdateVehicleReques request, CancellationToken cancellationToken)
     {
         var VehicleFound = await _vehicleRepository.GetByVehicle(request.plate, cancellationToken);
         if (VehicleFound == null) { return default; }
         _mapper.Map(request, VehicleFound);
         await _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<UpdateVehicleResponseDto>(VehicleFound);
+        return _mapper.Map<UpdateVehicleResponse>(VehicleFound);
     }
 }

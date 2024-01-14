@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.DataContext;
+using Persistence.Http;
 using Persistence.Repositories;
 using Persistence.Repository;
 
@@ -18,5 +19,8 @@ public static class ServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWorkRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IFuelRepository,FuelRepository>();
+        services.AddScoped<IDestinationRepository, DestinationRepository>();
+        services.AddScoped<IDepartureLocationRepository, DepartureLocationRepository>();
+        services.AddScoped<APIExternal>();
     }
 }

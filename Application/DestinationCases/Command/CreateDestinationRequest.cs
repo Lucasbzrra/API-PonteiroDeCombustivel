@@ -2,4 +2,4 @@
 using MediatR;
 namespace Application.DestinationCases.Command;
 
-public sealed record  CreateDestinationRequest(string City, string UF, string? ReferencePoint, Guid FuelId):IRequest<CreateDestinationResponse>;
+public sealed record CreateDestinationRequest(string Country, string Cep, string City, string UF, string? ReferencePoint, Guid FuelIdd):IRequest<CreateDestinationResponse>;
