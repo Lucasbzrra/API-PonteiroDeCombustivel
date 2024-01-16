@@ -27,6 +27,7 @@ public class FuelPointerDbContext:DbContext
         .WithOne(departure => departure.Fuel)
         .HasForeignKey<Destination>(departure => departure.FuelId);
 
+
         modelBuilder.Entity<Vehicle>().HasIndex(vehicle => vehicle.Plate).IsUnique();
         modelBuilder.Entity<Vehicle>().HasIndex(Vehicle=> Vehicle.idVehicle).IsUnique();
         modelBuilder.Entity<Fuel>().HasIndex(fuel => fuel.IdFuel).IsUnique();

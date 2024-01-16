@@ -18,8 +18,7 @@ public class Fuel : BaseEntity
     public double QuantityOfLiters { get; set; }
 
     [Required]
-    [Range(0, 1, ErrorMessage = "0-Gasol, 1-Etanol")]
-    public TypFuelEnum typeFuel { get; set; }
+    public  TypFuelEnum  typeFuel { get; set; }
 
 
     [Range(1, double.MaxValue)]

@@ -12,16 +12,16 @@ namespace WebFuelPointer.Controllers;
 [Route("/Controller")]
 public class DestinationController:ControllerBase
 {
-	private readonly Mediator _mediator;
+	private readonly IMediator _mediator;
 	private readonly ApiExternalCases _apiExternalCases;
-	public DestinationController(Mediator mediator, ApiExternalCases apiExternalCases)
+	public DestinationController(IMediator mediator, ApiExternalCases apiExternalCases)
 	{
 		_mediator = mediator;
 		_apiExternalCases = apiExternalCases;
 	}
     [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpPost("/Post/Destination")]
-    public async Task<ActionResult<CreateDestinationResponse>> post(string search, CancellationToken cancellationToken)
+    [HttpPost("/Post/Destination/{search}")]
+    public async Task<ActionResult<CreateDestinationResponse>> post( string search, CancellationToken cancellationToken)
     {
         List<string> DatefomatedApi = await _apiExternalCases.PassingOnData(search);
         CreateDestinationRequest createDestinationRequest = new CreateDestinationRequest(DatefomatedApi[5], DatefomatedApi[3] + DatefomatedApi[4], DatefomatedApi[1], DatefomatedApi[2], DatefomatedApi[0], default);

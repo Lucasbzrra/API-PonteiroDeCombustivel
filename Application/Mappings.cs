@@ -43,7 +43,7 @@ public sealed class Mappings : Profile
         CreateMap<Fuel, FuelDeleteResponse>();
 
 
-        CreateMap<CreateDestinationResponse, Destination>();
+        CreateMap<CreateDestinationRequest, Destination>();
         CreateMap<Destination, CreateDestinationResponse>();
 
         CreateMap<ReadDestinationResquet, Destination>();

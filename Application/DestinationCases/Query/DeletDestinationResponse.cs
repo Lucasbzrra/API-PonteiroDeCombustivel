@@ -6,6 +6,9 @@ namespace Application.DestinationCases.Query;
 
 public class DeletDestinationResponse
 {
+    public string Country { get; set; }
+
+    public string Cep { get; set; }
     public string City { get; set; }
     public string UF { get; set; }
 

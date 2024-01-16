@@ -5,7 +5,7 @@ namespace Application.ApiExternalCases;
 
 public class ApiExternalCases
 {
-    private IApiExternal _APIExternal;
+    private readonly IApiExternal _APIExternal;
     public ApiExternalCases(IApiExternal aPIExternal)
 	{
         _APIExternal = aPIExternal;

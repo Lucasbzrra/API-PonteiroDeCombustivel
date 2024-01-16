@@ -1,5 +1,6 @@
 using Application;
 using Persistence;
+using Persistence.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ builder.Services.ConfigurePersistenceApp(builder.Configuration); //<== Pegando o
 
 builder.Services.ConfigureApplicationApp(); //<== Pegando o bloco construtor de projeto 
 
-
+builder.Services.AddScoped<Application.ApiExternalCases.ApiExternalCases>();
 //builder.Services.AddDbContext<FuelPointerDbContext>(opt => opt.UseSqlServer("ConnectionStrings"));
 
 

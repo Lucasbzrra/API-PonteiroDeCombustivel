@@ -12,9 +12,5 @@ public class FuelReadResponse
 
     public string SupplyDate { get; set; }
 
-    public Vehicle Vehicle { get; set; }
-
-    public DepartureLocation departureLocation { get; set; }
-
-    public Destination destination { get; set; }
+  
 }

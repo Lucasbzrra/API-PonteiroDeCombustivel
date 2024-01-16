@@ -8,6 +8,6 @@ namespace Domain.Entities;
 
 public enum  TypFuelEnum
 {
-    gasol,
-    etanol
+    gasol=0,
+    etanol=1
 }

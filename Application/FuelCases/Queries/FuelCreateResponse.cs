@@ -9,9 +9,4 @@ public sealed record FuelCreateResponse
     public double ValuePerLiter { get; set; }
     public string SupplyDate { get; set; }
     
-    public  Vehicle Vehicle { get; set; }
-
-    public  DepartureLocation departureLocation { get; set; }
-    
-    public  Destination Destination { get; set; }
 }

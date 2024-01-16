@@ -10,9 +10,9 @@ namespace WebFuelPointer.Controllers;
 [Route("/Controller")]
 public class DepartureLocationController : ControllerBase
 {
-    private Mediator _mediator;
+    private IMediator _mediator;
     private ApiExternalCases _externalCases;
-    public DepartureLocationController(Mediator mediator, ApiExternalCases externalCases)
+    public DepartureLocationController(IMediator mediator, ApiExternalCases externalCases)
     {
         _mediator = mediator;
         _externalCases = externalCases;

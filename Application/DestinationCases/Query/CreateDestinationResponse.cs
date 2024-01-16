@@ -5,6 +5,9 @@ namespace Application.DestinationCases.Query;
 
 public class CreateDestinationResponse
 {
+    public string Country { get; set; }
+
+    public string  Cep { get; set; }
     public string City { get; set; }
     public string UF { get; set; }
 
