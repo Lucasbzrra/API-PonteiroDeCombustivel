@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.DestinationCases.Command;
 
-public sealed record class UpdateDestinationRequest( int IdDestination  , string City, string UF, string? ReferencePoint   ,Guid FuelId, Fuel Fuel ):IRequest<UpdateDestinationResponse>;
+public sealed record class UpdateDestinationRequest(int idDestination,string Country, string Cep, string City, string UF, string? ReferencePoint, Guid FuelIdd) :IRequest<UpdateDestinationResponse>;

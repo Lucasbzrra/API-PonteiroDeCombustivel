@@ -12,6 +12,4 @@ public class DeletDestinationResponse
     public string? ReferencePoint { get; set; }
 
     public int IdDestination { get; set; }
-    public Guid FuelId { get; set; }
-    public Fuel Fuel { get; set; }
 }

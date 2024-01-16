@@ -17,14 +17,25 @@ public class DepartureLocationController : ControllerBase
         _mediator = mediator;
         _externalCases = externalCases;
     }
+    [ProducesResponseType(statusCode:201),ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpPost]
-    public async Task<ActionResult<CreateDepartureLocationResponse>> Post( CreateDepartureLocationRequest createDepartureLocationRequest ,string Search , CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateDepartureLocationResponse>> Post(string Search, CancellationToken cancellationToken)
     {
-        var validacao= await _externalCases.LocationSearch(search: "valparaiso de goias, Havan");
-
-        await _mediator.Send(createDepartureLocationRequest);
-        return Ok(createDepartureLocationRequest);
+        List<string> DatefomatedApi = await _externalCases.PassingOnData(search: Search);
+        CreateDepartureLocationRequest createDepartureLocationRequest = new CreateDepartureLocationRequest(DatefomatedApi[5], DatefomatedApi[3] + DatefomatedApi[4], DatefomatedApi[1], DatefomatedApi[2], DatefomatedApi[0], default);
+        var response = await _mediator.Send(createDepartureLocationRequest);
+        return Ok(response);
     }
+    [ProducesResponseType(StatusCodes.Status202Accepted),ProducesResponseType(StatusCodes.Status204NoContent)]
+    [HttpPut]
+    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(string search,int IdDestination, CancellationToken cancellationToken)
+    {
+        List<string> DatefomatedApi = await _externalCases.PassingOnData(search: search);
+        UpdateDepartureLocationRequest updateDeparureLocationResquest = new UpdateDepartureLocationRequest(IdDestination, DatefomatedApi[5], DatefomatedApi[3] + DatefomatedApi[4], DatefomatedApi[1], DatefomatedApi[2], DatefomatedApi[0], default);
+        var response = await _mediator.Send(updateDeparureLocationResquest, cancellationToken);
+        return Ok(response);
+    }
+    [ProducesResponseType(StatusCodes.Status202Accepted),ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [HttpGet]
     public async Task<ActionResult<ReadDepartureLocationResponse>> Get(ReadDepartureLocationRequest readDepartureLocationRequest, CancellationToken cancellationToken)
     {
@@ -32,6 +43,7 @@ public class DepartureLocationController : ControllerBase
         if (response is null) { return BadRequest(response); }
         return Ok(response);
     }
+    [ProducesResponseType(StatusCodes.Status200OK),ProducesResponseType(StatusCodes.Status403Forbidden)]
     [HttpDelete]
     public async Task<ActionResult<DeleteDepartureLocationResponse>> Delete(DeleteDepartureLocationRequest deleteDepartureLocationRequest, CancellationToken cancellationToken)
     {

@@ -1,10 +1,12 @@
-﻿using Application.VehicleCases.CreateVehicle.Command;
+﻿using Application.FuelCases.Queries;
+using Application.VehicleCases.CreateVehicle.Command;
 using Application.VehicleCases.CreateVehicle.Queries;
 using Application.VehicleCases.CreateVehicle.Query;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
+using Persistence.Repositories;
 
 namespace Application.VehicleCases.Handler;
 
@@ -46,11 +48,12 @@ public class VehicleHandller : IRequestHandler<CreateVehicleRequest, CreateVehic
         await _unitOfWork.Commit(cancellationToken);
         return _mapper.Map<DeleteVehicleResponse>(VehicleFound);
 
+
     }
 
     public async Task<UpdateVehicleResponse> Handle(UpdateVehicleReques request, CancellationToken cancellationToken)
     {
-        var VehicleFound = await _vehicleRepository.GetByVehicle(request.plate, cancellationToken);
+        var VehicleFound = await _vehicleRepository.Get(request.id, cancellationToken);
         if (VehicleFound == null) { return default; }
         _mapper.Map(request, VehicleFound);
         await _unitOfWork.Commit(cancellationToken);

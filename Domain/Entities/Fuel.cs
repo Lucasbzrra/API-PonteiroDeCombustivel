@@ -18,20 +18,23 @@ public class Fuel : BaseEntity
     public double QuantityOfLiters { get; set; }
 
     [Required]
-    [Range(1, 2, ErrorMessage = "0-Gasol, 1-Etanol")]
+    [Range(0, 1, ErrorMessage = "0-Gasol, 1-Etanol")]
     public TypFuelEnum typeFuel { get; set; }
 
 
     [Range(1, double.MaxValue)]
     public double ValuePerLiter { get; set; }
-    [RegularExpression(@"^(nome|int)$")]
+
     public string SupplyDate { get; set; } 
 
-    public Guid departureLocationId { get; set; }
-    public  DepartureLocation departureLocation { get; set; }
+    public Guid VehicleID { get; set; }
+    public virtual Vehicle Vehicle { get; set; }
+
+    public Guid ? departureLocationId { get; set; }
+    public  DepartureLocation ? departureLocation { get; set; }
     
-    public Guid destinationId { get; set; }
-    public  Destination destination { get; set; }
+    public Guid ? destinationId { get; set; }
+    public  Destination ? destination { get; set; }
     
 
 }

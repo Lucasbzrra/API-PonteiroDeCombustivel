@@ -22,23 +22,23 @@ public class VehicleController:ControllerBase
 		var response = await _mediator.Send(createVehicleRequestDto,cancellationToken);
 		return Ok(response);
 	}
-	[HttpGet("/v1/GetVehicle/{id}")]
+	[HttpGet("/v1/GetVehicle/")]
 	[ProducesResponseType(statusCode:202),ProducesResponseType(statusCode:401)]
-	public async Task<ActionResult<ReadVehicleResponse>> Get([FromQuery] ReadVehicleRequest id , CancellationToken cancellationToken)
+	public async Task<ActionResult<ReadVehicleResponse>> Get( ReadVehicleRequest id , CancellationToken cancellationToken)
 	{
 		var response= await _mediator.Send(id, cancellationToken );
 		return Accepted(response);
 	}
     [HttpDelete("/v1/DeletVehicle/")]
     [ProducesResponseType(statusCode: 202), ProducesResponseType(statusCode: 401)]
-    public async Task<ActionResult<ReadVehicleResponse>> Delete([FromQuery] DeleteVehicleRequest dto, CancellationToken cancellationToken)
+    public async Task<ActionResult<ReadVehicleResponse>> Delete(DeleteVehicleRequest dto, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(dto, cancellationToken);
         return Accepted(response);
     }
     [HttpPut("/v1/UpdateVehicle/")]
     [ProducesResponseType(statusCode: 202), ProducesResponseType(statusCode: 401)]
-    public async Task<ActionResult<UpdateVehicleResponse>> Update([FromBody] UpdateVehicleReques dto, CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateVehicleResponse>> Update(UpdateVehicleReques dto, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(dto, cancellationToken);
         return Accepted(response);

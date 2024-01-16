@@ -21,6 +21,7 @@ public static class ServiceExtensions
         services.AddScoped<IFuelRepository,FuelRepository>();
         services.AddScoped<IDestinationRepository, DestinationRepository>();
         services.AddScoped<IDepartureLocationRepository, DepartureLocationRepository>();
-        services.AddScoped<APIExternal>();
+        services.AddScoped<IApiExternal, APIExternal>();
+        services.AddScoped<HttpClient>();
     }
 }

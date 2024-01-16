@@ -972,6 +972,8 @@
       },
       "Domain/1.0.0": {
         "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.NETCore.App": "2.2.8"
         },
         "runtime": {

@@ -48,7 +48,7 @@ public class DestinationHandler : IRequestHandler<CreateDestinationRequest, Crea
 
    public async Task<UpdateDestinationResponse> Handle(UpdateDestinationRequest request, CancellationToken cancellationToken)
     {
-        var destinatonFound = await _destinationRepository.GetbyDestination(request.IdDestination);
+        var destinatonFound = await _destinationRepository.GetbyDestination(request.idDestination);
         if(destinatonFound is null) { return default; }
         Destination destination= _mapper.Map<Destination>(destinatonFound);
         _destinationRepository.Update(destination);

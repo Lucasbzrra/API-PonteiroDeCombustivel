@@ -10,11 +10,9 @@ namespace WebFuelPointer.Controllers;
 public class FuelController:ControllerBase
 {
 	private readonly IMediator _mediator;
-    private  DestinationController _destinationController;
-	public FuelController(IMediator mediator, DestinationController destinationController)
+	public FuelController(IMediator mediator)
 	{
 		_mediator= mediator;
-        _destinationController= destinationController;
 	}
 
     /// <summary>
@@ -24,32 +22,40 @@ public class FuelController:ControllerBase
     /// <param name="cancellationToken"> Paramentro para fazer o cancelamento do cadastro</param>
     /// <returns></returns>
     [HttpPost("/v1/PostFuel/")]
-    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<FuelCreateResponse>> Create(FuelCreateRequest fuelCreateRequest, CancellationToken cancellationToken)
     {
 
         var response = await _mediator.Send(fuelCreateRequest, cancellationToken);
         
-        _destinationController.post(response.departureLocation, cancellationToken);
-
         return Ok(response);
     }
 
 
-    [HttpGet("/v1/GetFuel/{id}")]
-    [ProducesResponseType(statusCode: 200), ProducesResponseType(statusCode: 400)]
+    [HttpGet("/v1/GetFuel/")]
+    [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<FuelReadResponse>> Get(FuelReadRequest fuelReadRequest, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(fuelReadRequest, cancellationToken);
-        if (response is null) { return BadRequest(response); }
-        return Ok(response);
+        if (response is null) { return Unauthorized(response); }
+        return Accepted(response);
 
     }
-    [HttpDelete("/v1/DeletFuel/{id}")]
+    [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
+    [HttpPut("/v1/Put/Fuel")]
+    public async Task<ActionResult<FuelUpdateResponse>> put(FuelUpdateRequest fuelUpdateRequest, CancellationToken cancellationToken)
+    {
+        var response=await _mediator.Send(fuelUpdateRequest, cancellationToken);
+        if (response is null) { return NoContent(); }
+        return Accepted(response);
+    }
+
+    [HttpDelete("/v1/DeletFuel/")]
+    [ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<FuelDeleteResponse>> Delete(FuelDeleteRequest fuelDeleteRequest, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(fuelDeleteRequest, cancellationToken);
-        if (response is null) { return BadRequest(response); }
-        return Accepted(response);
+        if (response is null) { return NotFound() ; }
+        return Ok(response);
     }
 }

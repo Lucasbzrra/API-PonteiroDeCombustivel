@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Persistence.Http;
+using Persistence.Repositories;
+using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
 namespace Application;
@@ -9,6 +13,9 @@ public static class ServiceExtensions
     {
         services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-       // services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); <== Se caso eu fosse utilizar biblioteca Fluent Validation
+        //services.AddScoped<IDestinationRepository, DestinationRepository>();
+        //services.AddScoped<IDepartureLocationRepository, DepartureLocationRepository>();
+        //services.AddScoped<IApiExternal, APIExternal>();
+        //services.AddScoped<HttpClient>();
     }
 }

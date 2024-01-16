@@ -1,9 +1,11 @@
 ﻿using Application.FuelCases.Command;
 using Application.FuelCases.Queries;
+using Application.VehicleCases.CreateVehicle.Query;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
+using Persistence.Repositories;
 
 
 namespace Application.FuelCases.Handlers;
@@ -16,9 +18,9 @@ public class FuelHandler:IRequestHandler<FuelCreateRequest,FuelCreateResponse>,
 	private readonly IFuelRepository _FuelRepository;
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly IMapper _mapper;
-	public FuelHandler(IFuelRepository vehicleRepository, IUnitOfWork unitOfWork, IMapper mapper)
+	public FuelHandler(IFuelRepository FuelRepository, IUnitOfWork unitOfWork, IMapper mapper)
 	{
-        _FuelRepository = vehicleRepository;
+        _FuelRepository = FuelRepository;
         _unitOfWork= unitOfWork;
         _mapper= mapper;
 
@@ -35,13 +37,11 @@ public class FuelHandler:IRequestHandler<FuelCreateRequest,FuelCreateResponse>,
 
     public async Task<FuelDeleteResponse> Handle(FuelDeleteRequest request, CancellationToken cancellationToken)
     {
-        var FuelFound= _FuelRepository.Get(request.id, cancellationToken);
-        if(FuelFound is null) { return default; }
-        Fuel fuel= _mapper.Map<Fuel>(FuelFound);
-        _FuelRepository.Delete(fuel);
+        var FuelFound = await _FuelRepository.Get(request.id, cancellationToken);
+        if (FuelFound == null) { return default; }
+        _FuelRepository.Delete(FuelFound);
         await _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<FuelDeleteResponse>(fuel) ;
-
+        return _mapper.Map<FuelDeleteResponse>(FuelFound) ;
 
     }
 
