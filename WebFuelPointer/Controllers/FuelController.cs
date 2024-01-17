@@ -15,14 +15,10 @@ public class FuelController:ControllerBase
 		_mediator= mediator;
 	}
 
-    /// <summary>
-    /// Cadastramento de abastecimento de veiculo
-    /// </summary>
-    /// <param name="fuelCreateRequest"> Dados da para criação de cadastro</param>
-    /// <param name="cancellationToken"> Paramentro para fazer o cancelamento do cadastro</param>
-    /// <returns></returns>
-    [HttpPost("/v1/PostFuel/")]
+
     [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpPost("/Post/Fuel/")]
+   
     public async Task<ActionResult<FuelCreateResponse>> Create(FuelCreateRequest fuelCreateRequest, CancellationToken cancellationToken)
     {
 
@@ -31,9 +27,9 @@ public class FuelController:ControllerBase
         return Ok(response);
     }
 
-
-    [HttpGet("/v1/GetFuel/")]
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [HttpGet("/Get/Vehicle/{id}")]
+    
     public async Task<ActionResult<FuelReadResponse>> Get(FuelReadRequest fuelReadRequest, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(fuelReadRequest, cancellationToken);
@@ -41,8 +37,10 @@ public class FuelController:ControllerBase
         return Accepted(response);
 
     }
+
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
-    [HttpPut("/v1/Put/Fuel")]
+    [HttpPut("/Put/Fuel/{id}")]
+
     public async Task<ActionResult<FuelUpdateResponse>> put(FuelUpdateRequest fuelUpdateRequest, CancellationToken cancellationToken)
     {
         var response=await _mediator.Send(fuelUpdateRequest, cancellationToken);
@@ -50,8 +48,9 @@ public class FuelController:ControllerBase
         return Accepted(response);
     }
 
-    [HttpDelete("/v1/DeletFuel/")]
     [ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpDelete("/Delete/Fuel/{id}")]
+    
     public async Task<ActionResult<FuelDeleteResponse>> Delete(FuelDeleteRequest fuelDeleteRequest, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(fuelDeleteRequest, cancellationToken);

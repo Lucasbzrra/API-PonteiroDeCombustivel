@@ -15,32 +15,42 @@ public class VehicleController:ControllerBase
 	{
 		_mediator = mediator;
 	}
-	[HttpPost("/v1/PostVehicle/")]
-	[ProducesResponseType(statusCode:201),ProducesResponseType(statusCode:400)]
+
+	[HttpPost("/Post/Vehicle/")]
+    [ProducesResponseType(statusCode:201),ProducesResponseType(statusCode:400)]
+
 	public async Task<ActionResult<CreateVehicleResponse>> Create([FromBody]CreateVehicleRequest createVehicleRequestDto,CancellationToken cancellationToken)
 	{
 		var response = await _mediator.Send(createVehicleRequestDto,cancellationToken);
 		return Ok(response);
 	}
-	[HttpGet("/v1/GetVehicle/")]
-	[ProducesResponseType(statusCode:202),ProducesResponseType(statusCode:401)]
+
+    [HttpGet("/Get/Vehicle/{id}")]
+    [ProducesResponseType(statusCode:202),ProducesResponseType(statusCode:401)]
+
 	public async Task<ActionResult<ReadVehicleResponse>> Get( ReadVehicleRequest id , CancellationToken cancellationToken)
 	{
 		var response= await _mediator.Send(id, cancellationToken );
 		return Accepted(response);
 	}
-    [HttpDelete("/v1/DeletVehicle/")]
+
+    [HttpPut("/Put/Vehicle/{id}")]
     [ProducesResponseType(statusCode: 202), ProducesResponseType(statusCode: 401)]
-    public async Task<ActionResult<ReadVehicleResponse>> Delete(DeleteVehicleRequest dto, CancellationToken cancellationToken)
-    {
-        var response = await _mediator.Send(dto, cancellationToken);
-        return Accepted(response);
-    }
-    [HttpPut("/v1/UpdateVehicle/")]
-    [ProducesResponseType(statusCode: 202), ProducesResponseType(statusCode: 401)]
+
     public async Task<ActionResult<UpdateVehicleResponse>> Update(UpdateVehicleReques dto, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(dto, cancellationToken);
         return Accepted(response);
     }
+
+    [HttpDelete("/Delete/Vehicle/{id}")]
+    [ProducesResponseType(statusCode: 202), ProducesResponseType(statusCode: 401)]
+
+    public async Task<ActionResult<ReadVehicleResponse>> Delete(DeleteVehicleRequest dto, CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(dto, cancellationToken);
+        return Accepted(response);
+    }
+
+  
 }

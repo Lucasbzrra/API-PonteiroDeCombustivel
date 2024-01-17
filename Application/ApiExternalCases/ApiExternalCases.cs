@@ -1,4 +1,5 @@
-﻿using Application.DestinationCases.Command;
+﻿using Application.DepartureLocationCases.Command;
+using Application.DestinationCases.Command;
 using Domain.EntitiesExternal;
 using Domain.Interfaces;
 namespace Application.ApiExternalCases;
@@ -10,13 +11,27 @@ public class ApiExternalCases
 	{
         _APIExternal = aPIExternal;
 	}
-    public async Task<List<String>> PassingOnData(string search)
+    public async Task<Object> PassingOnData(string search, int ? id)
     {
         Finaly finaly = await LocationSearch(search);
         if (finaly == default) { throw new Exception("Falha ao buscar dados da api"); }
         var DatefomatedApi = await CutString(finaly.results[0].formatted);
-        return DatefomatedApi;
 
+        if (id == default) 
+        {
+           
+            CreateDepartureLocationRequest createDepartureLocationRequest = new CreateDepartureLocationRequest(
+                DatefomatedApi[5], 
+                DatefomatedApi[3] + DatefomatedApi[4], 
+                DatefomatedApi[1], 
+                DatefomatedApi[2], 
+                DatefomatedApi[0], 
+                default
+                );
+            return createDepartureLocationRequest;
+        }
+
+        return 
     }
 
     private async Task<Finaly> LocationSearch(string search)
@@ -30,6 +45,11 @@ public class ApiExternalCases
     {
         string[] Dates = APIdata.Split(',', '-');
         return Dates.ToList();
+    }
+
+    private async Task<Object> TypeRecord()
+    {
+        if()
     }
 
 }
