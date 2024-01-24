@@ -6,11 +6,11 @@ namespace Domain.Entities;
 public class Vehicle:BaseEntity
 {
 
-    private static int nextIdFuel = 0;
-    public int idVehicle { get; }
+    private static int nextIdFuel =1;
+    public int IdVehicle { get; }
     public Vehicle()
     {
-        idVehicle = nextIdFuel;
+        IdVehicle = nextIdFuel;
         nextIdFuel++;
     }
 

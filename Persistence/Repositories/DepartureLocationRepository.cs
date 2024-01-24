@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence.DataContext;
 
 
@@ -14,7 +15,7 @@ public class DepartureLocationRepository : BaseRepository<DepartureLocation>, ID
 
     public async Task<DepartureLocation> GetbyDepartureLocation(int id)
     {
-        return _context.Tb_DepartureLocations.FirstOrDefault(departure => departure.IdDepartureLocation == id);
+        return  _context.Tb_DepartureLocations.FirstOrDefault(departure => departure.IdDepartureLocation == id);
     }
 
 }

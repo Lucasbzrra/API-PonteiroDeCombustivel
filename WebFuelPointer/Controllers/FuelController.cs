@@ -28,7 +28,7 @@ public class FuelController:ControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [HttpGet("/Get/Vehicle/{id}")]
+    [HttpGet("/Get/Fuel/{id}")]
     
     public async Task<ActionResult<FuelReadResponse>> Get(FuelReadRequest fuelReadRequest, CancellationToken cancellationToken)
     {

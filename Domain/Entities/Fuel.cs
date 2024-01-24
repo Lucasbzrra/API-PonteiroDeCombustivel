@@ -5,7 +5,7 @@ namespace Domain.Entities;
 
 public class Fuel : BaseEntity
 {
-    private static int nextIdFuel = 0;
+    private static int nextIdFuel = 1;
     public int IdFuel { get; }
     public Fuel()
     {
@@ -29,11 +29,11 @@ public class Fuel : BaseEntity
     public Guid VehicleID { get; set; }
     public virtual Vehicle Vehicle { get; set; }
 
-    public Guid ? departureLocationId { get; set; }
-    public  DepartureLocation ? departureLocation { get; set; }
-    
-    public Guid ? destinationId { get; set; }
-    public  Destination ? destination { get; set; }
-    
+    public Guid? departureLocationId { get; set; }
+    public DepartureLocation? departureLocation { get; set; }
+
+    public Guid? destinationId { get; set; }
+    public Destination? destination { get; set; }
+
 
 }

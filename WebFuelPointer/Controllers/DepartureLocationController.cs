@@ -17,15 +17,14 @@ public class DepartureLocationController : ControllerBase
         _mediator = mediator;
         _externalCases = externalCases;
     }
-    
-    [ProducesResponseType(statusCode:201),ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpPost("/Post/DepartureLocation/{search}")]
 
-    public async Task<ActionResult<CreateDepartureLocationResponse>> Post(string Search, CancellationToken cancellationToken)
-    {
-       
-        var createDepartureLocationRequest = await _externalCases.PassingOnData(Search,default);
-        var response = await _mediator.Send(createDepartureLocationRequest,cancellationToken);
+    [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpPost("/Post/DepartureLocation/{search}/{id}")]
+
+    public async Task<ActionResult<CreateDepartureLocationResponse>> Post(Guid id , string Search, CancellationToken cancellationToken)
+    { 
+        var createDepartureLocationRequest = await _externalCases.PassingOnData(Search,id);
+        var response = await _mediator.Send(createDepartureLocationRequest, cancellationToken);
         return Ok(response);
     }
 
@@ -40,11 +39,11 @@ public class DepartureLocationController : ControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
-    [HttpPut("/Put/DepartureLocation/{search}")]
+    [HttpPut("/Put/DepartureLocation/{id}/{search}")]
 
-    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(string search, int IdDestination, CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(Guid id,string search, int IdDestination, CancellationToken cancellationToken)
     {
-        var updateDeparureLocationResquest = await _externalCases.PassingOnData(search: search, IdDestination);
+        var updateDeparureLocationResquest = await _externalCases.PassingOnData(search, id);
         var response = await _mediator.Send(updateDeparureLocationResquest, cancellationToken);
         return Ok(response);
     }

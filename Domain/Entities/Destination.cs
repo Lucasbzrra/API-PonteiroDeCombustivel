@@ -10,5 +10,5 @@ public class Destination:BaseEntityLocation
         nextIdDestination++;
     }
     public Guid FuelId { get; set; }
-    public  Fuel Fuel { get; set; }
+    public Fuel Fuel { get; set; }
 }

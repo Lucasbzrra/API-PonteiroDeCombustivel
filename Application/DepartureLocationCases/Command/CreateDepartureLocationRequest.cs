@@ -1,4 +1,5 @@
 ﻿using Application.DepartureLocationCases.Query;
+using Domain.EntitiesExternal;
 using MediatR;
 
 namespace Application.DepartureLocationCases.Command;

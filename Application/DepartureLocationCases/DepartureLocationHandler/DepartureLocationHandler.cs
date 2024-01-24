@@ -4,6 +4,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
+using Persistence.Repositories;
 
 namespace Application.DepartureLocationCases.DepartureLocationHandler;
 
@@ -33,7 +34,7 @@ public class DepartureLocationHandler : IRequestHandler<CreateDepartureLocationR
 
     public async Task<ReadDepartureLocationResponse> Handle(ReadDepartureLocationRequest request, CancellationToken cancellationToken)
     {
-        var DepartureLocationFound = _departureLocationRepository.GetbyDepartureLocation(request.idDepartureLocation);
+        var DepartureLocationFound = await _departureLocationRepository.GetbyDepartureLocation(request.idDepartureLocation);
         return _mapper.Map<ReadDepartureLocationResponse>(DepartureLocationFound);
     }
 

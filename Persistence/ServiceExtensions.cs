@@ -1,8 +1,10 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.DataContext;
+using Microsoft.AspNetCore.Identity;
 using Persistence.Http;
 using Persistence.Repositories;
 using Persistence.Repository;

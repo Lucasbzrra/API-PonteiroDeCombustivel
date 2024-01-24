@@ -3,7 +3,7 @@ namespace Domain.Entities;
 
 public class DepartureLocation:BaseEntityLocation
 {
-    private static int nextIdDeparture = 0;
+    private static int nextIdDeparture = 1;
     public int IdDepartureLocation { get; }
     public DepartureLocation()
     {
