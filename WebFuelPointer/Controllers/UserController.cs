@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using Application.UserCases;
+using Application.UserCases.Command;
+using Application.UserCases.Query;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebFuelPointer.Controllers;
@@ -12,21 +15,32 @@ public class UserController : ControllerBase
     {
         _mediator = mediator;
     }
-    //[HttpGet("/Get/User/{}")]
-    //public async Task<ActionResult<GetAllLoginUserResponse>> Get(GetAllReadloginRequest readloginRequest,CancellationToken cancellationToken)
-    //{
-    //    _mediator.Send();
-    //}
 
-    //[HttpPost("/Post/User")]
-    //public async Task<ActionResult<CreateLoginResponse>> Post(CreateLoginRequest createLoginRequest, CancellationToken cancellation)
-    //{
-    //   var response= _mediator.Send(createLoginRequest, cancellation);
-    //    return CreatedAtAction(nameof(Get), new { name = createLoginRequest.Email }, response);
-    //}
-    //[HttpDelete("/Delete/User/{id}")]
-    //public async Task<ActionResult<DeleteloginResponse>> Delete(DeleteloginResponseRequest deleteloginResponseRequest, CancellationToken cancellationToken)
-    //{
+    [HttpPost("/Post/User")]
+    public async Task<ActionResult<CreateLoginResponse>> Post(CreateLoginRequest createLoginRequest, CancellationToken cancellation)
+    {
+        var response = _mediator.Send(createLoginRequest, cancellation);
+        return CreatedAtAction(nameof(Get), new { name = createLoginRequest.Email }, response);
+    }
 
-    //}
+    [HttpGet("/Get/User/")]
+    public async Task<ActionResult<ReadLoginResponse>> Get(ReadLoginRequest readloginRequest, CancellationToken cancellationToken)
+    {
+        var response= _mediator.Send(readloginRequest,cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpPut("/Update/User")]
+    public async Task<ActionResult<UpdateLoginResponse>> Put(UpdateLoginRequest updateLoginRequest,CancellationToken cancellationToken)
+    {
+        var response =_mediator.Send(updateLoginRequest, cancellationToken);
+        return Ok(response);
+    }
+    
+    [HttpDelete("/Delete/User/")]
+    public async Task<ActionResult<DeleteLoginResponse>> Delete(DeleteLoginRequest deleteloginResponseRequest, CancellationToken cancellationToken)
+    {
+        var response=_mediator.Send(deleteloginResponseRequest, cancellationToken);
+        return Ok(response);
+    }
 }

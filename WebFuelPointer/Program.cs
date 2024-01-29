@@ -1,6 +1,12 @@
 using Application;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using Persistence.DataContext;
 using Persistence.Http;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +17,9 @@ builder.Services.ConfigureApplicationApp(); //<== Pegando o bloco construtor de 
 
 builder.Services.AddScoped<Application.ApiExternalCases.ApiExternalCases>();
 //builder.Services.AddDbContext<FuelPointerDbContext>(opt => opt.UseSqlServer("ConnectionStrings"));
-
+builder.Services.AddIdentity<User, IdentityRole>()
+           .AddEntityFrameworkStores<FuelPointerDbContext>()
+           .AddDefaultTokenProviders();
 
 
 builder.Services.AddControllers();
@@ -31,6 +39,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

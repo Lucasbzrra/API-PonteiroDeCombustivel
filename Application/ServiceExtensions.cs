@@ -1,8 +1,8 @@
 ﻿using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.Http;
-using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using Application.UserCases;
+
 
 namespace Application;
 
@@ -12,8 +12,10 @@ public static class ServiceExtensions
     {
         services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        //services.AddScoped<IApiExternal, APIExternal>();
-
+        //services.AddIdentity<Domain.Entities.User, IdentityRole>()
+        //
+        //.AddDefaultTokenProviders();
+        services.AddScoped<IToken, TokenService>();
     }
 
 }

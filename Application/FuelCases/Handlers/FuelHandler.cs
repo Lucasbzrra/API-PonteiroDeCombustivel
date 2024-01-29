@@ -1,11 +1,9 @@
 ﻿using Application.FuelCases.Command;
 using Application.FuelCases.Queries;
-using Application.VehicleCases.CreateVehicle.Query;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
-using Persistence.Repositories;
 
 
 namespace Application.FuelCases.Handlers;

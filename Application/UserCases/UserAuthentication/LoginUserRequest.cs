@@ -1,4 +1,5 @@
 ﻿
+using Application.UserCases.Query;
 using MediatR;
 
 namespace Application.UserCases.UserAuthentication;

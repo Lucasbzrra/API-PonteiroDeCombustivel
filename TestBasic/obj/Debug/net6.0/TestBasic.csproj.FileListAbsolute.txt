@@ -18,7 +18,6 @@ C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Deb
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
@@ -157,3 +156,4 @@ C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Deb
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

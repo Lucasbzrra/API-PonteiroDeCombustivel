@@ -90,3 +90,4 @@ C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\WebFuelPointer\bi
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\WebFuelPointer\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\WebFuelPointer\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\WebFuelPointer\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\WebFuelPointer\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

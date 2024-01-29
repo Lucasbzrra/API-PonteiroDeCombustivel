@@ -4,6 +4,10 @@ using Application.DestinationCases.Command;
 using Application.DestinationCases.Query;
 using Application.FuelCases.Command;
 using Application.FuelCases.Queries;
+using Application.UserCases;
+using Application.UserCases.Command;
+using Application.UserCases.Query;
+using Application.UserCases.UserAuthentication;
 using Application.VehicleCases.CreateVehicle.Command;
 using Application.VehicleCases.CreateVehicle.Queries;
 using Application.VehicleCases.CreateVehicle.Query;
@@ -64,6 +68,23 @@ public sealed class Mappings : Profile
 
         CreateMap<DeleteDepartureLocationRequest, DepartureLocation>();
         CreateMap<DepartureLocation, DeleteDepartureLocationResponse>();
+
+
+        CreateMap<CreateLoginRequest, User>();
+        CreateMap<User, CreateLoginResponse>();
+
+        CreateMap<ReadLoginRequest, User>();
+        CreateMap<User, ReadLoginResponse>();
+
+        CreateMap<UpdateLoginRequest, User>();
+        CreateMap<User, UpdateLoginResponse>();
+
+        CreateMap<DeleteLoginRequest, User>();
+        CreateMap<User, DeleteLoginResponse>();
+
+
+
+        CreateMap<LoginUserRequest, LoginUserResponse>();
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,7 +9,12 @@ using System.Text;
 namespace Application.UserCases;
 
 public class TokenService:IToken
-{
+{   
+    private IConfiguration _configuration;
+    public TokenService(IConfiguration configuration)
+    {
+        _configuration= configuration;
+    }
     public async Task<string> GenerateToken(User user)
     {
         Claim[] claims = new Claim[]
@@ -16,7 +22,7 @@ public class TokenService:IToken
             new Claim("email",user.Email),
             new Claim("id",user.Id)
         };
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(""));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));
         var signCredential = new SigningCredentials(key: key, SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken
            (
