@@ -3,7 +3,7 @@
 
 namespace Domain.Interfaces;
 
-public interface IBaseRepository<T>where T:BaseEntity
+public interface IBaseRepository<T>where T:BaseEntity 
 {
     Task Create(T entity);
     Task Delete(T entity);

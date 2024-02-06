@@ -2,4 +2,4 @@
 using MediatR;
 
 namespace Application.UserCases.Command;
-public sealed record UpdateLoginRequest(string cpf, string email) : IRequest<UpdateLoginResponse>;
+public sealed record UpdateLoginRequest(string username, string email) : IRequest<UpdateLoginResponse>;

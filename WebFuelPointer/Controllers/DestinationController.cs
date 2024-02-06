@@ -23,12 +23,12 @@ public class DestinationController:ControllerBase
     [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpPost("/Post/Destination/{search}")]
 
-    //public async Task<ActionResult<CreateDestinationResponse>> post(string search, CancellationToken cancellationToken)
-    //{
-    //    var createDestinationRequest = await _apiExternalCases.PassingOnData(search, id);
-    //    var responseDestination = await _mediator.Send(createDestinationRequest, cancellationToken);
-    //    return Ok(responseDestination);
-    //}
+    public async Task<ActionResult<CreateDestinationResponse>> post(Guid id,string search, CancellationToken cancellationToken)
+    {
+        var createDestinationRequest = await _apiExternalCases.PassingOnData(search, id);
+        var responseDestination = await _mediator.Send(createDestinationRequest, cancellationToken);
+        return Ok(responseDestination);
+    }
 
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [HttpGet("/Get/Destination/{id}")]
@@ -39,16 +39,16 @@ public class DestinationController:ControllerBase
         return Ok(responseDestination);
     }
 
-    //[ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
-    //[HttpPut("/Put/Destination/{id}")]
-    
-    //public async Task<ActionResult<UpdateDestinationResponse>> Put(string search,int IdDestination, CancellationToken cancellationToken)
-    //{
-    //    var updateDestinationRequest = await _apiExternalCases.PassingOnData(search);
-    //    var responseDestination = await _mediator.Send(updateDestinationRequest, cancellationToken); 
-    //    return Ok(responseDestination);
-    //}
-    
+    [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
+    [HttpPut("/Put/Destination/{id}")]
+
+    public async Task<ActionResult<UpdateDestinationResponse>> Put(Guid id,string search,  CancellationToken cancellationToken)
+    {
+        var updateDestinationRequest = await _apiExternalCases.PassingOnData(search,id);
+        var responseDestination = await _mediator.Send(updateDestinationRequest, cancellationToken);
+        return Ok(responseDestination);
+    }
+
     [ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status403Forbidden)]
     [HttpDelete("/Delete/Destination/{id}")]
     

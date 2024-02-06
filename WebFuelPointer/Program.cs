@@ -16,10 +16,7 @@ builder.Services.ConfigurePersistenceApp(builder.Configuration); //<== Pegando o
 builder.Services.ConfigureApplicationApp(); //<== Pegando o bloco construtor de projeto 
 
 builder.Services.AddScoped<Application.ApiExternalCases.ApiExternalCases>();
-//builder.Services.AddDbContext<FuelPointerDbContext>(opt => opt.UseSqlServer("ConnectionStrings"));
-builder.Services.AddIdentity<User, IdentityRole>()
-           .AddEntityFrameworkStores<FuelPointerDbContext>()
-           .AddDefaultTokenProviders();
+
 
 
 builder.Services.AddControllers();

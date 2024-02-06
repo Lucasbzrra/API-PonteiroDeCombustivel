@@ -7,7 +7,7 @@ namespace Domain.Entities;
 public abstract class BaseEntity
 {
     [Key]
-    public Guid id { get; set; }
+    public Guid Id { get; set; }
     public DateTimeOffset DateCreated { get; set; }
 
     public DateTimeOffset DateUpdate { get; set; }

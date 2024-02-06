@@ -1,17 +1,18 @@
-﻿
-
-using Microsoft.AspNetCore.Identity;
-using System.Text.Json.Serialization;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities;
 
-public class User :IdentityUser
+public class  User :IdentityUser
 {
-    public DateTimeOffset DateCreated { get; set; }
 
-    public DateTimeOffset DateUpdate { get; set; }
+    private static int nextIdUser = 1;
+    public int IdUser { get; set; }
+    public User() : base() 
+    {
 
-    public DateTimeOffset DateDeleted { get; set; }
-    public User() : base() { }
+        IdUser = nextIdUser;
+        nextIdUser++;
+    }
   
+    public  ICollection<Vehicle> ? vehicles { get; set; }
 }

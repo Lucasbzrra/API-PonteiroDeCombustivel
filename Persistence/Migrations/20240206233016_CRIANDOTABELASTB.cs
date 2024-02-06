@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class ok : Migration
+    public partial class CRIANDOTABELASTB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DateUpdate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DateDeleted = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    IdUser = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -49,24 +47,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tb_Vehicles",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdVehicle = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Plate = table.Column<string>(type: "char(7)", maxLength: 7, nullable: false),
-                    KmPerLiter = table.Column<double>(type: "float", nullable: false),
-                    DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DateUpdate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DateDeleted = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tb_Vehicles", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,10 +156,35 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tb_Vehicles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdVehicle = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Plate = table.Column<string>(type: "char(7)", maxLength: 7, nullable: false),
+                    KmPerLiter = table.Column<double>(type: "float", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    DateUpdate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    DateDeleted = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tb_Vehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tb_Vehicles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tb_Fuels",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdFuel = table.Column<int>(type: "int", nullable: false),
                     QuantityOfLiters = table.Column<double>(type: "float", nullable: false),
                     typeFuel = table.Column<int>(type: "int", nullable: false),
@@ -194,12 +199,12 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_Fuels", x => x.id);
+                    table.PrimaryKey("PK_Tb_Fuels", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Tb_Fuels_Tb_Vehicles_VehicleID",
                         column: x => x.VehicleID,
                         principalTable: "Tb_Vehicles",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -207,7 +212,7 @@ namespace Persistence.Migrations
                 name: "Tb_DepartureLocations",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdDepartureLocation = table.Column<int>(type: "int", nullable: false),
                     FuelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -217,16 +222,18 @@ namespace Persistence.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReferencePoint = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_DepartureLocations", x => x.id);
+                    table.PrimaryKey("PK_Tb_DepartureLocations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Tb_DepartureLocations_Tb_Fuels_FuelId",
                         column: x => x.FuelId,
                         principalTable: "Tb_Fuels",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -234,7 +241,7 @@ namespace Persistence.Migrations
                 name: "Tb_Destinations",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdDestination = table.Column<int>(type: "int", nullable: false),
                     FuelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -244,16 +251,18 @@ namespace Persistence.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReferencePoint = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_Destinations", x => x.id);
+                    table.PrimaryKey("PK_Tb_Destinations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Tb_Destinations_Tb_Fuels_FuelId",
                         column: x => x.FuelId,
                         principalTable: "Tb_Fuels",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -342,6 +351,11 @@ namespace Persistence.Migrations
                 table: "Tb_Vehicles",
                 column: "Plate",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tb_Vehicles_UserId",
+                table: "Tb_Vehicles",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -371,13 +385,13 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Tb_Fuels");
 
             migrationBuilder.DropTable(
                 name: "Tb_Vehicles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

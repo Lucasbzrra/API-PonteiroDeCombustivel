@@ -4,6 +4,6 @@ using MediatR;
 namespace Application.VehicleCases.CreateVehicle.Command;
 
 
-public sealed record CreateVehicleRequest(string Name, string Plate, double KmPerLiter) : IRequest<CreateVehicleResponse>;
+public sealed record CreateVehicleRequest(string Name, string Plate, double KmPerLiter, string UserId  ) : IRequest<CreateVehicleResponse>;
 
 

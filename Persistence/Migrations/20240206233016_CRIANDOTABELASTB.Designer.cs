@@ -12,8 +12,8 @@ using Persistence.DataContext;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FuelPointerDbContext))]
-    [Migration("20240129222043_ok")]
-    partial class ok
+    [Migration("20240206233016_CRIANDOTABELASTB")]
+    partial class CRIANDOTABELASTB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.DepartureLocation", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -64,7 +64,15 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.Property<string>("lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("FuelId")
                         .IsUnique();
@@ -77,7 +85,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Destination", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -115,7 +123,15 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.Property<string>("lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("FuelId")
                         .IsUnique();
@@ -128,7 +144,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Fuel", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -166,7 +182,7 @@ namespace Persistence.Migrations
                     b.Property<int>("typeFuel")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdFuel")
                         .IsUnique();
@@ -188,21 +204,15 @@ namespace Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset>("DateCreated")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("DateDeleted")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("DateUpdate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -252,7 +262,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Vehicle", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -280,13 +290,19 @@ namespace Persistence.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("char(7)");
 
-                    b.HasKey("id");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IdVehicle")
                         .IsUnique();
 
                     b.HasIndex("Plate")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tb_Vehicles");
                 });
@@ -457,6 +473,17 @@ namespace Persistence.Migrations
                     b.Navigation("Vehicle");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Vehicle", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("vehicles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -513,6 +540,11 @@ namespace Persistence.Migrations
                     b.Navigation("departureLocation");
 
                     b.Navigation("destination");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Navigation("vehicles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vehicle", b =>

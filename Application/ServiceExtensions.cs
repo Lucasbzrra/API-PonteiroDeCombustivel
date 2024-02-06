@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Application.UserCases;
-
+using Persistence.DataContext;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application;
 
@@ -12,7 +14,7 @@ public static class ServiceExtensions
     {
         services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        //services.AddIdentity<Domain.Entities.User, IdentityRole>()
+        
         //
         //.AddDefaultTokenProviders();
         services.AddScoped<IToken, TokenService>();

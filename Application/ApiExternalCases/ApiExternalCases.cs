@@ -2,7 +2,7 @@
 using Application.DestinationCases.Command;
 using Domain.EntitiesExternal;
 using Domain.Interfaces;
-using System.Diagnostics.Metrics;
+using System.Linq.Expressions;
 
 namespace Application.ApiExternalCases;
 
@@ -15,10 +15,15 @@ public class ApiExternalCases
 	}
     public async Task<Object> PassingOnData(string search,Guid id)
     {
+        List<string> DateFormatedApi= new List<string>();
+
         Finaly finaly = await LocationSearch(search);
         if (finaly == default) { throw new Exception("Falha ao buscar dados da api"); }
-        List<string> DatefomatedApi = await CutString(finaly.results[0].formatted);
-        var CreateRequest = TypeRecor(DatefomatedApi,'a', id);
+        var result = await CutString(finaly.results[0].formatted);
+        DateFormatedApi = result;
+        DateFormatedApi.Add(finaly.results[0].geometry.lat.ToString());
+        DateFormatedApi.Add(finaly.results[0].geometry.lng.ToString());
+        var CreateRequest = TypeRecor(DateFormatedApi,'a', id);
         return CreateRequest;
     }
 
@@ -47,6 +52,8 @@ public class ApiExternalCases
                  DatefomatedApi[1],
                  DatefomatedApi[2],
                  DatefomatedApi[0],
+                 DatefomatedApi[7],
+                 DatefomatedApi[8],
                  id
                     );
                 return createDeparture;
@@ -58,41 +65,14 @@ public class ApiExternalCases
                  DatefomatedApi[1],
                  DatefomatedApi[2],
                  DatefomatedApi[0],
-                 default
+                 DatefomatedApi[6],
+                 DatefomatedApi[7],
+                 id
                     );
                 return createDestination;
         }
         return default;
     }
 
-    //static Object TypeRecord(Object Object, List<string> DatefomatedApi)
-    //{
-    //    return Object switch
-    //    {
-    //        CreateDepartureLocationRequest createDeparture => createDeparture with
-    //        {
-    //            Country = DatefomatedApi[5],
-    //            Cep = DatefomatedApi[3] + DatefomatedApi[4],
-    //            City = DatefomatedApi[1],
-    //            UF = DatefomatedApi[2],
-    //            ReferencePoint = DatefomatedApi[0],
-    //            FuelId = default
-                 
-    //        },
-    //        CreateDestinationRequest createDestination => createDestination with
-    //        {
-    //             Country = DatefomatedApi[5],
-    //             Cep = DatefomatedApi[3] + DatefomatedApi[4],
-    //             City = DatefomatedApi[1],
-    //             UF = DatefomatedApi[2],
-    //             ReferencePoint = DatefomatedApi[0],
-    //            FuelIdd = default
-
-    //        },
-    //        _ => Object
-
-
-    //    };
-       
-    //}
+  
 }

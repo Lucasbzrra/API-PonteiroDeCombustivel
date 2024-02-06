@@ -1,9 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Persistence.DataContext;
-using System.Linq;
-
 namespace Persistence.Repositories;
 
 public class FuelRepository : BaseRepository<Fuel>,IFuelRepository

@@ -41,7 +41,7 @@ public class DepartureLocationController : ControllerBase
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
     [HttpPut("/Put/DepartureLocation/{id}/{search}")]
 
-    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(Guid id,string search, int IdDestination, CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(Guid id,string search,  CancellationToken cancellationToken)
     {
         var updateDeparureLocationResquest = await _externalCases.PassingOnData(search, id);
         var response = await _mediator.Send(updateDeparureLocationResquest, cancellationToken);

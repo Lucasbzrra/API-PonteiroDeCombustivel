@@ -23,6 +23,8 @@ public class Vehicle:BaseEntity
 
     [Range(1, double.MaxValue)]
     public double KmPerLiter { get; set; }
-
+    
+    public string UserId { get; set; }
+    public  User User { get; set; }
     public virtual ICollection<Fuel>? Fuel { get; set; }
 }
