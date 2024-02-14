@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.FuelCases.Command;
 
-public sealed record FuelUpdateRequest(int id, double QuantityOfLiters, TypFuelEnum typeFuel, double ValuePerLiter, string SupplyDate) : IRequest<FuelUpdateResponse>;
+public sealed record FuelUpdateRequest(int IdFuel, double QuantityOfLiters, TypFuelEnum typeFuel, double ValuePerLiter, string SupplyDate) : IRequest<FuelUpdateResponse>;

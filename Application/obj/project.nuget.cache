@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "X1X9nf235tSIhWqzArolwgFmwcgShCZ93Mai088Aqa+9jC5OfcbbgTXolddUb4v8EE8Y0dnILExaTqii3wbvaQ==",
+  "dgSpecHash": "YnETPPinXuigdpmXy70VHbRkem1sSkdZu0yG97jf+Od+MebFGPhHcYE8cpMbh8E7jEhEXpzn7NZWvY3x51e1zA==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucas\\source\\repos\\CleanArchitecture-Web-Fuel-Pointer\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucas\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.0\\fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

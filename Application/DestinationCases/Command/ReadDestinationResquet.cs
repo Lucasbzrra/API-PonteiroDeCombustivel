@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.DestinationCases.Command;
 
-public sealed record  ReadDestinationResquet(int IdDestination) : IRequest<ReadDestinationResponse>;
+public sealed record  ReadDestinationResquet(Guid IdDestination) : IRequest<ReadDestinationResponse>;

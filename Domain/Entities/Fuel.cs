@@ -1,6 +1,4 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-
 namespace Domain.Entities;
 
 public class Fuel : BaseEntity
@@ -13,15 +11,13 @@ public class Fuel : BaseEntity
         nextIdFuel++;
     }
 
-    [Required]
-    [Range(1, 50)]
+
     public double QuantityOfLiters { get; set; }
 
-    [Required]
+
     public  TypFuelEnum  typeFuel { get; set; }
 
 
-    [Range(1, double.MaxValue)]
     public double ValuePerLiter { get; set; }
 
     public string SupplyDate { get; set; } 
@@ -29,11 +25,11 @@ public class Fuel : BaseEntity
     public Guid VehicleID { get; set; }
     public virtual Vehicle Vehicle { get; set; }
 
-    public Guid? departureLocationId { get; set; }
-    public DepartureLocation? departureLocation { get; set; }
+    public Guid? DepartureLocationId { get; set; }
+    public virtual DepartureLocation? DepartureLocation { get; set; }
 
-    public Guid? destinationId { get; set; }
-    public Destination? destination { get; set; }
+    public Guid? DestinationId { get; set; }
+    public virtual Destination? Destination { get; set; }
 
 
 }

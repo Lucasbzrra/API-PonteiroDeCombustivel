@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.DepartureLocationCases.Command;
 
-public sealed record ReadDepartureLocationRequest(int idDepartureLocation) : IRequest<ReadDepartureLocationResponse>;
+public sealed record ReadDepartureLocationRequest(Guid idDepartureLocation) : IRequest<ReadDepartureLocationResponse>;

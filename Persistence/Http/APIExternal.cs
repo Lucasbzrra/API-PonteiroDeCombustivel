@@ -22,7 +22,7 @@ public  class APIExternal:IApiExternal
             var responseBody = response.Content.ReadAsStringAsync().Result;
             Finaly finaly = await ConvertTobeClass(responseBody);
             return finaly;
-            
+
         }
         catch (Exception)
         {

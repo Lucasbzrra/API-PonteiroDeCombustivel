@@ -34,22 +34,22 @@ public class DepartureLocationHandler : IRequestHandler<CreateDepartureLocationR
 
     public async Task<ReadDepartureLocationResponse> Handle(ReadDepartureLocationRequest request, CancellationToken cancellationToken)
     {
-        var DepartureLocationFound = await _departureLocationRepository.GetbyDepartureLocation(request.idDepartureLocation);
+        var DepartureLocationFound = await _departureLocationRepository.Get(request.idDepartureLocation,cancellationToken);
         return _mapper.Map<ReadDepartureLocationResponse>(DepartureLocationFound);
     }
 
     public async Task<UpdateDeparureLocationResponse> Handle(UpdateDepartureLocationRequest request, CancellationToken cancellationToken)
     {
-        var DepartureLocationFound = _departureLocationRepository.GetbyDepartureLocation(request.idDepartureLocation);
+        var DepartureLocationFound = await _departureLocationRepository.Get(request.idDepartureLocation,cancellationToken);
         if (DepartureLocationFound is null) { return default; }
-        DepartureLocation departureLocation = _mapper.Map<DepartureLocation>(DepartureLocationFound);
-        await _departureLocationRepository.Update(departureLocation);
-        return _mapper.Map<UpdateDeparureLocationResponse>(departureLocation);
+        _mapper.Map(request, DepartureLocationFound);
+         _departureLocationRepository.Update(DepartureLocationFound);
+        return _mapper.Map<UpdateDeparureLocationResponse>(DepartureLocationFound);
     }
 
     public async Task<DeleteDepartureLocationResponse> Handle(DeleteDepartureLocationRequest request, CancellationToken cancellationToken)
     {
-        var DepartureLocationFound = _departureLocationRepository.GetbyDepartureLocation(request.idDepartureLocation);
+        var DepartureLocationFound = _departureLocationRepository.Get(request.idDepartureLocation,cancellationToken);
         if (DepartureLocationFound is null) { return default; }
         DepartureLocation departureLocation = _mapper.Map<DepartureLocation>(DepartureLocationFound);
         await _departureLocationRepository.Delete(departureLocation);

@@ -2,7 +2,7 @@
 
 public class Destination:BaseEntityLocation
 {
-    private static int nextIdDestination = 0;
+    private static int nextIdDestination = 1;
     public int IdDestination { get; }
     public Destination()
     {

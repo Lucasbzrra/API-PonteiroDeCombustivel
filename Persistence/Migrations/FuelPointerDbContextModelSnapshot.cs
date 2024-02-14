@@ -55,18 +55,18 @@ namespace Persistence.Migrations
                     b.Property<int>("IdDepartureLocation")
                         .HasColumnType("int");
 
+                    b.Property<string>("Lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ReferencePoint")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UF")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lat")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lng")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -114,18 +114,18 @@ namespace Persistence.Migrations
                     b.Property<int>("IdDestination")
                         .HasColumnType("int");
 
+                    b.Property<string>("Lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ReferencePoint")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UF")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lat")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lng")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -155,6 +155,12 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset>("DateUpdate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<Guid?>("DepartureLocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DestinationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("IdFuel")
                         .HasColumnType("int");
 
@@ -169,12 +175,6 @@ namespace Persistence.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid>("VehicleID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("departureLocationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("destinationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("typeFuel")
@@ -285,8 +285,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Plate")
                         .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("char(7)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -441,7 +440,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.DepartureLocation", b =>
                 {
                     b.HasOne("Domain.Entities.Fuel", "Fuel")
-                        .WithOne("departureLocation")
+                        .WithOne("DepartureLocation")
                         .HasForeignKey("Domain.Entities.DepartureLocation", "FuelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -452,7 +451,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Destination", b =>
                 {
                     b.HasOne("Domain.Entities.Fuel", "Fuel")
-                        .WithOne("destination")
+                        .WithOne("Destination")
                         .HasForeignKey("Domain.Entities.Destination", "FuelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -535,9 +534,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Fuel", b =>
                 {
-                    b.Navigation("departureLocation");
+                    b.Navigation("DepartureLocation");
 
-                    b.Navigation("destination");
+                    b.Navigation("Destination");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

@@ -148,3 +148,6 @@ C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Deb
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\lucas\source\repos\CleanArchitecture-Web-Fuel-Pointer\TestBasic\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

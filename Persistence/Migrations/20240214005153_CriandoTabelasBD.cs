@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class CRIANDOTABELASTB : Migration
+    public partial class CriandoTabelasBD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,7 +162,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdVehicle = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Plate = table.Column<string>(type: "char(7)", maxLength: 7, nullable: false),
+                    Plate = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     KmPerLiter = table.Column<double>(type: "float", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -191,8 +191,8 @@ namespace Persistence.Migrations
                     ValuePerLiter = table.Column<double>(type: "float", nullable: false),
                     SupplyDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VehicleID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    departureLocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    destinationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DepartureLocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DestinationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     DateUpdate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     DateDeleted = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
@@ -223,8 +223,8 @@ namespace Persistence.Migrations
                     UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReferencePoint = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,8 +252,8 @@ namespace Persistence.Migrations
                     UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReferencePoint = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Lat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lng = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

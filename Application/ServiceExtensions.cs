@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Application.UserCases;
-using Persistence.DataContext;
-using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
+using Application.Shared.Behavior;
+using MediatR;
+using FluentValidation;
 
 namespace Application;
 
@@ -14,9 +14,8 @@ public static class ServiceExtensions
     {
         services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        
-        //
-        //.AddDefaultTokenProviders();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddScoped<IToken, TokenService>();
     }
 

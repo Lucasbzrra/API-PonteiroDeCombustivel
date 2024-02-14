@@ -19,11 +19,12 @@ public class DepartureLocationController : ControllerBase
     }
 
     [ProducesResponseType(statusCode: 201), ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpPost("/Post/DepartureLocation/{search}/{id}")]
+    [HttpPost("/Post/DepartureLocation/{search}/{idfuel}")]
 
-    public async Task<ActionResult<CreateDepartureLocationResponse>> Post(Guid id , string Search, CancellationToken cancellationToken)
-    { 
-        var createDepartureLocationRequest = await _externalCases.PassingOnData(Search,id);
+    public async Task<ActionResult<CreateDepartureLocationResponse>> Post(Guid idfuel , string Search, CancellationToken cancellationToken)
+    {
+        var result = await _externalCases.PassingOnData(Search);
+        var createDepartureLocationRequest  = await _externalCases.MapeandoDados(result, idfuel, null,null);
         var response = await _mediator.Send(createDepartureLocationRequest, cancellationToken);
         return Ok(response);
     }
@@ -39,12 +40,13 @@ public class DepartureLocationController : ControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status202Accepted), ProducesResponseType(StatusCodes.Status204NoContent)]
-    [HttpPut("/Put/DepartureLocation/{id}/{search}")]
+    [HttpPut("/Put/DepartureLocation/{idfuel}/{search}")]
 
-    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(Guid id,string search,  CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateDeparureLocationResponse>> Put(Guid idfuel, Guid idlocal,string search,  CancellationToken cancellationToken)
     {
-        var updateDeparureLocationResquest = await _externalCases.PassingOnData(search, id);
-        var response = await _mediator.Send(updateDeparureLocationResquest, cancellationToken);
+        var result = await _externalCases.PassingOnData(search);
+        var UpdateDepartureLocationRequest = await _externalCases.MapeandoDados(result, idfuel, "UpdateDeparture", idlocal);
+        var response = await _mediator.Send(UpdateDepartureLocationRequest, cancellationToken);
         return Ok(response);
     }
 

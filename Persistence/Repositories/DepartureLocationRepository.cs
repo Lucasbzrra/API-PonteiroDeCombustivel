@@ -15,7 +15,7 @@ public class DepartureLocationRepository : BaseRepository<DepartureLocation>, ID
 
     public async Task<DepartureLocation> GetbyDepartureLocation(int id)
     {
-        return  _context.Tb_DepartureLocations.FirstOrDefault(departure => departure.IdDepartureLocation == id);
+        return await  _context.Tb_DepartureLocations.FirstOrDefaultAsync(departure => departure.IdDepartureLocation == id);
     }
 
 }

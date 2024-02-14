@@ -25,7 +25,7 @@ public class VehicleController:ControllerBase
 		return Ok(response);
 	}
 
-    [HttpGet("/Get/Vehicle/{id}")]
+    [HttpGet("/Get/Vehicle")]
     [ProducesResponseType(statusCode:202),ProducesResponseType(statusCode:401)]
 
 	public async Task<ActionResult<ReadVehicleResponse>> Get( ReadVehicleRequest id , CancellationToken cancellationToken)
@@ -40,6 +40,7 @@ public class VehicleController:ControllerBase
     public async Task<ActionResult<UpdateVehicleResponse>> Update(UpdateVehicleReques dto, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(dto, cancellationToken);
+        if (response is null) { return NoContent(); }
         return Accepted(response);
     }
 

@@ -36,11 +36,14 @@ public sealed class Mappings : Profile
         CreateMap<FuelCreateRequest, Fuel>();
         CreateMap<Fuel, FuelCreateResponse>();
 
-
         CreateMap<FuelReadRequest, Fuel>();
         CreateMap<Fuel, FuelReadResponse>();
 
-        CreateMap<FuelUpdateRequest, Fuel>();
+        CreateMap<FuelUpdateRequest, Fuel>()
+        .ForMember(dest => dest.QuantityOfLiters, opt => opt.MapFrom(src => src.QuantityOfLiters))
+        .ForMember(dest => dest.typeFuel, opt => opt.MapFrom(src => src.typeFuel))
+        .ForMember(dest => dest.ValuePerLiter, opt => opt.MapFrom(src => src.ValuePerLiter))
+        .ForMember(dest => dest.SupplyDate, opt => opt.MapFrom(src => src.SupplyDate));
         CreateMap<Fuel, FuelUpdateResponse>();
 
         CreateMap<FuelDeleteRequest, Fuel>();
@@ -69,6 +72,8 @@ public sealed class Mappings : Profile
         CreateMap<DeleteDepartureLocationRequest, DepartureLocation>();
         CreateMap<DepartureLocation, DeleteDepartureLocationResponse>();
 
+        CreateMap<UpdateDepartureLocationRequest, DepartureLocation>();
+        CreateMap<DepartureLocation,UpdateDeparureLocationResponse>();
 
         CreateMap<CreateLoginRequest, User>();
         CreateMap<User, CreateLoginResponse>();

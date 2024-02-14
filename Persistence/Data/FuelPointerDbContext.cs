@@ -37,12 +37,12 @@ public class FuelPointerDbContext: IdentityDbContext<User>
 
 
         modelBuilder.Entity<Fuel>()
-        .HasOne(Fuel => Fuel.departureLocation)
+        .HasOne(Fuel => Fuel.DepartureLocation)
         .WithOne(departure => departure.Fuel)
         .HasForeignKey<DepartureLocation>(departure => departure.FuelId);
 
         modelBuilder.Entity<Fuel>()
-        .HasOne(fuel => fuel.destination)
+        .HasOne(fuel => fuel.Destination)
         .WithOne(departure => departure.Fuel)
         .HasForeignKey<Destination>(departure => departure.FuelId);
 

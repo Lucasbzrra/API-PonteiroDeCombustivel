@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence.DataContext;
 namespace Persistence.Repositories;
 
@@ -10,6 +11,6 @@ public class FuelRepository : BaseRepository<Fuel>,IFuelRepository
     }
     public async Task<Fuel> GetByFuel(int id, CancellationToken cancellationToken)
     {
-        return _context.Tb_Fuels.FirstOrDefault(x => x.IdFuel == id);
+        return await _context.Tb_Fuels.FirstOrDefaultAsync(x => x.IdFuel == id);
     }
 }

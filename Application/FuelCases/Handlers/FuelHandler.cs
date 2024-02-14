@@ -52,11 +52,11 @@ public class FuelHandler:IRequestHandler<FuelCreateRequest,FuelCreateResponse>,
 
     public async Task<FuelUpdateResponse> Handle(FuelUpdateRequest request, CancellationToken cancellationToken)
     {
-        var FuelFound = _FuelRepository.GetByFuel(request.id, cancellationToken);
+        var FuelFound = await _FuelRepository.GetByFuel(request.IdFuel, cancellationToken);
         if (FuelFound is null) { return default; }
-        Fuel fuel = _mapper.Map<Fuel>(FuelFound);
-        _FuelRepository.Update(fuel);
+        _mapper.Map(request, FuelFound);
+        _FuelRepository.Update(FuelFound);
         await _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<FuelUpdateResponse>(fuel);
+        return _mapper.Map<FuelUpdateResponse>(FuelFound);
     }
 }

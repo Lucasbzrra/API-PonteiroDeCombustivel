@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "h5V1dNnSujjNdorGz1fb7YPdVP+EKkG5+ZsfR73q9YF67enP/9awFmINNfeJ0uUzHdn7Fw3k0P6yMBlog135vg==",
+  "dgSpecHash": "AWv7/ozO1BWh7c6WUis6AGXST9QZKsDv8z1M718VZOnsQWrGrqN0CBFppE+nehTvssAagsUwO94UCfGYG9KL2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucas\\source\\repos\\CleanArchitecture-Web-Fuel-Pointer\\TestBasic\\TestBasic.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\lucas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.0\\fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",

@@ -54,8 +54,9 @@ public class VehicleHandller : IRequestHandler<CreateVehicleRequest, CreateVehic
     public async Task<UpdateVehicleResponse> Handle(UpdateVehicleReques request, CancellationToken cancellationToken)
     {
         var VehicleFound = await _vehicleRepository.Get(request.id, cancellationToken);
-        if (VehicleFound == null) { return default; }
+        if (VehicleFound is null) { return default; }
         _mapper.Map(request, VehicleFound);
+        _vehicleRepository.Update(VehicleFound);
         await _unitOfWork.Commit(cancellationToken);
         return _mapper.Map<UpdateVehicleResponse>(VehicleFound);
     }

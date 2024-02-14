@@ -10,8 +10,8 @@ public class VehicleRepository : BaseRepository<Vehicle>, IVehicleRepository
     public VehicleRepository(FuelPointerDbContext context) : base(context) { }
 
 
-    public Task<Vehicle> GetByVehicle(string plate, CancellationToken cancellationToken)
+    public async Task<Vehicle> GetByVehicle(string plate, CancellationToken cancellationToken)
     {
-        return _context.Tb_Vehicles.FirstOrDefaultAsync(x=>x.Plate== plate,cancellationToken);
+        return await _context.Tb_Vehicles.FirstOrDefaultAsync(x=>x.Plate== plate,cancellationToken);
     }
 }

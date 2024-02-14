@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.DepartureLocationCases.Command;
 
-public sealed record DeleteDepartureLocationRequest(int idDepartureLocation) : IRequest<DeleteDepartureLocationResponse>;
+public sealed record DeleteDepartureLocationRequest(Guid idDepartureLocation) : IRequest<DeleteDepartureLocationResponse>;

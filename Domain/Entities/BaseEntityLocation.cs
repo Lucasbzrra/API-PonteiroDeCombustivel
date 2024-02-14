@@ -14,7 +14,7 @@ public abstract class BaseEntityLocation:BaseEntity
 
     public string Cep { get; set; }
 
-    public string lat { get; set; }
-    public string lng { get; set; }
+    public string Lat { get; set; }
+    public string Lng { get; set; }
 
 }

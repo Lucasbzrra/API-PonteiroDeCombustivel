@@ -11,6 +11,6 @@ public sealed class Result
     [JsonPropertyName("geometry")]
 
     public Geometry geometry { get; set; }
-
-
+    [JsonPropertyName("components")]
+   public Components components { get; set; }
 }

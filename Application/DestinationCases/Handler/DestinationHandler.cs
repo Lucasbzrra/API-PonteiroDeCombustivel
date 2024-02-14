@@ -26,20 +26,20 @@ public class DestinationHandler : IRequestHandler<CreateDestinationRequest, Crea
     {
         var Destination = _mapper.Map<Destination>(request);
         await _destinationRepository.Create(Destination);
-        _unitOfWork.Commit(cancellationToken);
+        await  _unitOfWork.Commit(cancellationToken);
         return _mapper.Map<CreateDestinationResponse>(Destination);
     }
 
     public async Task<ReadDestinationResponse> Handle(ReadDestinationResquet request, CancellationToken cancellationToken)
     {
 
-        var destinationFound = await _destinationRepository.GetbyDestination(request.IdDestination);
+        var destinationFound = await _destinationRepository.Get(request.IdDestination, cancellationToken);
         return _mapper.Map<ReadDestinationResponse>(destinationFound);
     }
 
     public async Task<DeletDestinationResponse> Handle(DeletDestinationRequest request, CancellationToken cancellationToken)
     {
-        var destinatonFound = await _destinationRepository.GetbyDestination(request.IdDestination);
+        var destinatonFound = await _destinationRepository.Get(request.IdDestination,cancellationToken);
         if (destinatonFound is null) { return default; }
         _unitOfWork.Commit(cancellationToken);
         return _mapper.Map<DeletDestinationResponse>(destinatonFound);
@@ -48,12 +48,12 @@ public class DestinationHandler : IRequestHandler<CreateDestinationRequest, Crea
 
    public async Task<UpdateDestinationResponse> Handle(UpdateDestinationRequest request, CancellationToken cancellationToken)
     {
-        var destinatonFound = await _destinationRepository.GetbyDestination(request.idDestination);
+        var destinatonFound = await _destinationRepository.Get(request.idDestination,cancellationToken);
         if(destinatonFound is null) { return default; }
-        Destination destination= _mapper.Map<Destination>(destinatonFound);
-        _destinationRepository.Update(destination);
+        _mapper.Map(request, destinatonFound);
+        _destinationRepository.Update(destinatonFound);
         _unitOfWork.Commit(cancellationToken);
-        return _mapper.Map<UpdateDestinationResponse>(destination);
+        return _mapper.Map<UpdateDestinationResponse>(destinatonFound);
 
     }
 }
